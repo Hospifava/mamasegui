@@ -402,6 +402,40 @@
     .dibujo-bebe { position: relative; display: block; width: 100%; max-width: 230px; margin: 0 auto; }
     .dibujo-bebe svg { display: block; width: 100%; height: auto; }
 
+    /* Animaciones suaves del dibujo: el bebé flota y se mece, patea con el piecito,
+       el corazoncito late y suben burbujitas. Se apagan con "reducir movimiento". */
+    .dibujo-bebe .flota    { animation: flotar 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 60%; }
+    .dibujo-bebe .piecito  { animation: patear 5s ease-in-out infinite; transform-box: fill-box; transform-origin: 90% 20%; }
+    .dibujo-bebe .latido   { animation: latir 1.1s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+    .dibujo-bebe .burbuja  { animation: subir 6s ease-in infinite; transform-box: fill-box; }
+    .dibujo-bebe .burbuja.b2 { animation-delay: -2s; }
+    .dibujo-bebe .burbuja.b3 { animation-delay: -4s; }
+
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-4px) rotate(-3deg); }
+    }
+
+    @keyframes patear {
+      0%, 60%, 100% { transform: rotate(0deg); }
+      68%           { transform: rotate(-16deg); }
+      76%           { transform: rotate(4deg); }
+      84%           { transform: rotate(-10deg); }
+    }
+
+    @keyframes latir {
+      0%, 100% { transform: scale(1); }
+      15%      { transform: scale(1.25); }
+      30%      { transform: scale(1); }
+      45%      { transform: scale(1.15); }
+    }
+
+    @keyframes subir {
+      0%   { transform: translateY(0);     opacity: 0; }
+      15%  { opacity: 0.85; }
+      100% { transform: translateY(-60px); opacity: 0; }
+    }
+
     .estas-aca {
       position: absolute;
       top: 4px;
@@ -863,120 +897,180 @@
       };
     }
 
-    // ---------- 7.4 Dibujos SVG ----------
-    // Bebé en el vientre: un círculo (el útero) y el bebé acurrucado que crece mes a mes.
-    // El bebé se dibuja una sola vez (coordenadas alrededor de 0,0) y se agranda con "scale".
-    const ESCALA_BEBE = [0, 0.36, 0.55, 0.7, 0.84, 0.96, 1.08, 1.2, 1.3];
+    // ---------- 7.4 Dibujos SVG (estilo ilustración infantil) ----------
+    // Bebé en la panza: una burbuja rosada (el útero) con el bebé acurrucado adentro.
+    // El bebé se dibuja una sola vez, mirando de frente, alrededor del punto 0,0,
+    // y se agranda mes a mes con "scale". Las clases flota / piecito / latido / burbuja
+    // tienen animaciones suaves en el CSS (se apagan si el celular pide "menos movimiento").
+    const PIEL = "#ffd6c2", PIEL_BORDE = "#e8977f", MEJILLA = "#ff9db4", OJOS = "#8b4a3c";
+    const ESCALA_BEBE = [0, 0.5, 0.62, 0.74, 0.86, 0.96, 1.06, 1.17, 1.27];
+
+    // Fondo común: burbuja con degradé, placenta, estrellitas y burbujas que suben
+    function fondoPanza(mes) {
+      return `
+        <defs>
+          <radialGradient id="panza-${mes}" cx="45%" cy="40%" r="65%">
+            <stop offset="0" stop-color="#fff7fa"/>
+            <stop offset="0.75" stop-color="#fde3ec"/>
+            <stop offset="1" stop-color="#f9cfdd"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="94" fill="#fbecf1"/>
+        <circle cx="100" cy="100" r="84" fill="url(#panza-${mes})" stroke="#f3b9cc" stroke-width="4"/>
+        <!-- placenta (nubecita) -->
+        <path d="M140 44q4-10 14-8q10-4 15 6q8 4 3 12q-2 8-12 6q-8 6-15 0q-10-2-5-16z" fill="#f6b3c8" stroke="#e997b1" stroke-width="2.5" stroke-linejoin="round"/>
+        <!-- estrellitas -->
+        <path d="M44 70l2 5 5 2-5 2-2 5-2-5-5-2 5-2z" fill="#d8c3f0"/>
+        <path d="M150 150l1.6 4 4 1.6-4 1.6-1.6 4-1.6-4-4-1.6 4-1.6z" fill="#d8c3f0"/>
+        <path d="M58 150l1.2 3 3 1.2-3 1.2-1.2 3-1.2-3-3-1.2 3-1.2z" fill="#f6b3c8"/>
+        <!-- burbujitas que suben -->
+        <circle class="burbuja" cx="62" cy="128" r="4" fill="#fff" opacity="0.8"/>
+        <circle class="burbuja b2" cx="140" cy="120" r="3" fill="#fff" opacity="0.8"/>
+        <circle class="burbuja b3" cx="76" cy="150" r="2.5" fill="#fff" opacity="0.8"/>`;
+    }
+
+    // Carita de frente: ojitos cerrados sonrientes, cachetes, naricita y sonrisa.
+    // (cx, cy) es el centro de la cara.
+    function caritaBebe(cx, cy) {
+      return `
+        <g fill="none" stroke="${OJOS}" stroke-width="2.6" stroke-linecap="round">
+          <path d="M${cx - 15} ${cy - 1}q4.5 4.5 9 0"/>
+          <path d="M${cx + 6} ${cy - 1}q4.5 4.5 9 0"/>
+          <path d="M${cx - 4} ${cy + 9}q4 3.5 8 0"/>
+        </g>
+        <circle cx="${cx - 15}" cy="${cy + 7}" r="5" fill="${MEJILLA}" opacity="0.7"/>
+        <circle cx="${cx + 15}" cy="${cy + 7}" r="5" fill="${MEJILLA}" opacity="0.7"/>
+        <circle cx="${cx}" cy="${cy + 4}" r="1.6" fill="${PIEL_BORDE}"/>`;
+    }
 
     function svgBebe(mes) {
-      const piel = "#f6c7b0", borde = "#d9967c";
-      let contenido = "";
+      let bebe;
 
       if (mes === 1) {
-        // Mes 1: un grupito de células con un brillito
-        contenido = `
-          <g fill="#f2a5c0" stroke="#d97a9c" stroke-width="1.5">
-            <circle cx="100" cy="100" r="9"/><circle cx="111" cy="94" r="6"/><circle cx="92" cy="91" r="5.5"/>
-            <circle cx="108" cy="108" r="5"/><circle cx="90" cy="106" r="4.5"/>
+        // Mes 1: una "semillita" chiquita con carita y su corazoncito que empieza a latir
+        bebe = `
+          <circle cx="100" cy="100" r="30" fill="#fff" opacity="0.55"/>
+          <g class="flota">
+            <path d="M88 86q8-14 22-6q12 8 6 24q-6 14-20 12q-14-2-14-14q0-8 6-16z" fill="${PIEL}" stroke="${PIEL_BORDE}" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M93 98q2.5 2.5 5 0M103 98q2.5 2.5 5 0" fill="none" stroke="${OJOS}" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="91" cy="103" r="2.8" fill="${MEJILLA}" opacity="0.7"/>
+            <circle cx="110" cy="103" r="2.8" fill="${MEJILLA}" opacity="0.7"/>
           </g>
-          <path d="M128 76l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#c9b3e6"/>
-          <path d="M70 120l1.4 4 4 1.4-4 1.4-1.4 4-1.4-4-4-1.4 4-1.4z" fill="#c9b3e6"/>`;
+          <path class="latido" d="M122 82c-2.5-4-9-2-6.5 3l6.5 6 6.5-6c2.5-5-4-7-6.5-3z" fill="#f2668f"/>`;
       } else {
         const s = ESCALA_BEBE[mes - 1];
-        const giro = mes === 9 ? 165 : mes >= 7 ? 20 : 0;   // en el mes 9 se pone cabeza abajo
-        // Cabeza abajo (mes 9): la boquita se dibuja al revés para que, girada, siga sonriendo
-        const boca = mes === 9 ? "M-32 -14q3 -3 7 -1" : "M-32 -15q3 3 7 1";
-        const pelo = mes >= 5 && mes < 9 ?`<path d="M-26 -46q8-10 18-6q6-8 14 0" fill="none" stroke="#b07a5c" stroke-width="3" stroke-linecap="round"/>` : "";
+        const cabezaAbajo = mes === 9;   // en el mes 9 el bebé se acomoda cabeza abajo
+        const giro = cabezaAbajo ? 180 : 0;
+        const grosor = (3 / s).toFixed(2);   // trazo parejo aunque el dibujo cambie de tamaño
+        // Detalles que aparecen a medida que crece
+        const ricito = mes >= 4 ? `<path d="M-8 -46q2-10 10-8q6 2 2 8q-3 3-6 0" fill="none" stroke="#c0785e" stroke-width="${grosor}" stroke-linecap="round"/>` : "";
+        const deditos = mes >= 3 ? `<g fill="${PIEL_BORDE}"><circle cx="-24" cy="36" r="1.4"/><circle cx="-20.5" cy="39" r="1.4"/><circle cx="-16" cy="40.5" r="1.4"/></g>` : "";
 
-        // Punto de la pancita del bebé (para el cordón), pasado a coordenadas del dibujo
-        const rad = giro * Math.PI / 180, bx = -6, by = 26;
-        const px = 100 + s * (bx * Math.cos(rad) - by * Math.sin(rad));
-        const py = 100 + s * (bx * Math.sin(rad) + by * Math.cos(rad));
+        // Punto de la pancita (para el cordón), pasado a coordenadas del dibujo
+        const signo = cabezaAbajo ? -1 : 1;
+        const px = 100 + s * signo * 8, py = 100 + s * signo * 22;
 
-        contenido = `
-          <path d="M${px.toFixed(1)} ${py.toFixed(1)} Q${(px + 50).toFixed(1)} ${(py + 30).toFixed(1)} 152 52" fill="none" stroke="#e8a3bb" stroke-width="${(2 + s * 2).toFixed(1)}" stroke-linecap="round"/>
-          <g transform="translate(100 100) rotate(${giro}) scale(${s})" stroke="${borde}" stroke-width="${(2 / s).toFixed(2)}">
-            <!-- cuerpito -->
-            <ellipse cx="8" cy="12" rx="26" ry="33" transform="rotate(-18 8 12)" fill="${piel}"/>
-            <!-- pierna doblada y piecito -->
-            <ellipse cx="20" cy="34" rx="18" ry="11" transform="rotate(-35 20 34)" fill="${piel}"/>
-            <ellipse cx="-2" cy="46" rx="10" ry="6" transform="rotate(10 -2 46)" fill="${piel}"/>
-            <!-- cabeza -->
-            <circle cx="-10" cy="-28" r="25" fill="${piel}"/>
-            <!-- bracito con la manito cerca de la cara -->
-            <ellipse cx="-12" cy="2" rx="6.5" ry="15" transform="rotate(35 -12 2)" fill="${piel}"/>
-            <circle cx="-22" cy="-8" r="6" fill="${piel}"/>
-            <!-- orejita -->
-            <circle cx="2" cy="-26" r="5" fill="${piel}"/>
-            <!-- carita: ojito cerrado, cachete y sonrisa -->
-            <path d="M-27 -32q5 4 10 0" fill="none" stroke="#8a5646" stroke-linecap="round"/>
-            <circle cx="-25" cy="-21" r="4.5" fill="#f19aae" stroke="none" opacity="0.75"/>
-            <path d="${boca}" fill="none" stroke="#8a5646" stroke-linecap="round"/>
-            ${pelo}
+        bebe = `
+          <path d="M${px.toFixed(1)} ${py.toFixed(1)} C${(px + 40).toFixed(1)} ${(py + 20).toFixed(1)} 170 90 154 58" fill="none" stroke="#f0a0b9" stroke-width="${(3 + s * 1.5).toFixed(1)}" stroke-linecap="round"/>
+          <g class="flota">
+            <g transform="translate(100 ${cabezaAbajo ? 104 : 98}) rotate(${giro}) scale(${s})" stroke="${PIEL_BORDE}" stroke-width="${grosor}" stroke-linejoin="round">
+              <!-- orejita (atrás de la cabeza) -->
+              <circle cx="21" cy="-20" r="6.5" fill="${PIEL}"/>
+              <!-- cuerpito redondito -->
+              <ellipse cx="8" cy="16" rx="24" ry="23" fill="${PIEL}"/>
+              <!-- piernita doblada y piecito que patea -->
+              <ellipse cx="2" cy="28" rx="18" ry="11.5" transform="rotate(-12 2 28)" fill="${PIEL}"/>
+              <g class="piecito">
+                <ellipse cx="-19" cy="36" rx="9.5" ry="7" transform="rotate(-20 -19 36)" fill="${PIEL}"/>
+                ${deditos}
+              </g>
+              <!-- cabeza grande -->
+              <circle cx="-4" cy="-20" r="27" fill="${PIEL}"/>
+              <!-- carita y ricito: si está cabeza abajo, se giran para que se vean derechos -->
+              <g transform="rotate(${giro} -4 -20)">${ricito}<g stroke="none">${caritaBebe(-4, -20)}</g></g>
+              <!-- bracito con la manito cerca del cachete -->
+              <ellipse cx="-17" cy="10" rx="6.5" ry="11" transform="rotate(28 -17 10)" fill="${PIEL}"/>
+              <circle cx="-23" cy="2" r="6.5" fill="${PIEL}"/>
+            </g>
           </g>`;
       }
 
       return `
         <svg viewBox="0 0 200 200" role="img" aria-label="Dibujo del bebé en la panza en el mes ${mes}">
-          <circle cx="100" cy="100" r="92" fill="#fbecf1"/>
-          <circle cx="100" cy="100" r="82" fill="#fdf5f8" stroke="#f1c3d4" stroke-width="3"/>
-          <ellipse cx="152" cy="52" rx="16" ry="9" transform="rotate(45 152 52)" fill="#eeb0c5"/>
-          ${contenido}
+          ${fondoPanza(mes)}
+          ${bebe}
         </svg>`;
     }
 
-    // Frutas y verduras para comparar el tamaño (viewBox 64×64)
+    // Carita para las frutas: ojitos, cachetes y sonrisa (cx, cy = centro; t = tamaño)
+    function caritaFruta(cx, cy, t = 1, color = "#5a3a2a") {
+      return `
+        <circle cx="${cx - 5 * t}" cy="${cy}" r="${1.8 * t}" fill="${color}"/>
+        <circle cx="${cx + 5 * t}" cy="${cy}" r="${1.8 * t}" fill="${color}"/>
+        <path d="M${cx - 2.5 * t} ${cy + 3 * t}q${2.5 * t} ${2.5 * t} ${5 * t} 0" fill="none" stroke="${color}" stroke-width="${1.6 * t}" stroke-linecap="round"/>
+        <circle cx="${cx - 8.5 * t}" cy="${cy + 3 * t}" r="${2.2 * t}" fill="#ff8fab" opacity="0.6"/>
+        <circle cx="${cx + 8.5 * t}" cy="${cy + 3 * t}" r="${2.2 * t}" fill="#ff8fab" opacity="0.6"/>`;
+    }
+
+    // Frutas y verduras para comparar el tamaño (viewBox 64×64), con carita
     function svgFruta(nombre) {
       let d = "";
       switch (nombre) {
         case "lenteja":
-          d = `<ellipse cx="32" cy="34" rx="15" ry="12" fill="#d79a52" stroke="#a96a2e" stroke-width="2"/>
-               <ellipse cx="27" cy="30" rx="5" ry="3" fill="#f2c995"/>`;
+          d = `<ellipse cx="32" cy="36" rx="20" ry="15" fill="#e0a35e" stroke="#b07034" stroke-width="2.5"/>
+               <ellipse cx="25" cy="29" rx="6" ry="3" fill="#f5d2a3"/>${caritaFruta(32, 37, 0.9)}`;
           break;
         case "uva":
-          d = `<path d="M32 22q1-7 7-10" fill="none" stroke="#7a5a2a" stroke-width="2.5" stroke-linecap="round"/>
-               <path d="M36 16q8-6 14 0q-7 5-14 0z" fill="#6aa84f"/>
-               <circle cx="32" cy="38" r="16" fill="#8a5cb8" stroke="#653d92" stroke-width="2"/>
-               <ellipse cx="26" cy="32" rx="4" ry="5" fill="#b896dc"/>`;
+          d = `<path d="M32 20q1-7 7-10" fill="none" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/>
+               <path d="M37 14q9-6 15 1q-8 5-15-1z" fill="#79b85a" stroke="#4f8a34" stroke-width="1.5"/>
+               <circle cx="32" cy="38" r="19" fill="#9a6cc8" stroke="#6c43a0" stroke-width="2.5"/>
+               <ellipse cx="24" cy="30" rx="4.5" ry="5.5" fill="#c8a8e8"/>${caritaFruta(32, 40, 1, "#3a2050")}`;
           break;
         case "limon":
-          d = `<path d="M8 34q2-3 5-4q6-14 19-14q13 0 19 14q3 1 5 4q-2 3-5 4q-6 14-19 14q-13 0-19-14q-3-1-5-4z" fill="#f4d63c" stroke="#c9a51c" stroke-width="2"/>
-               <path d="M34 16q6-8 14-6q-4 8-14 6z" fill="#5f9e3a"/>
-               <ellipse cx="25" cy="28" rx="6" ry="3" fill="#fbe98a"/>`;
+          d = `<path d="M6 36q2-3 5-4q6-15 21-15q15 0 21 15q3 1 5 4q-2 3-5 4q-6 15-21 15q-15 0-21-15q-3-1-5-4z" fill="#ffe14d" stroke="#d4ae1c" stroke-width="2.5"/>
+               <path d="M34 17q7-9 15-6q-5 9-15 6z" fill="#6aae46" stroke="#4b8a2e" stroke-width="1.5"/>
+               <ellipse cx="22" cy="29" rx="6" ry="3" fill="#fff3a8"/>${caritaFruta(32, 37)}`;
           break;
         case "palta":
-          d = `<path d="M32 6c-10 0-12 14-14 22c-4 14 2 30 14 30s18-16 14-30c-2-8-4-22-14-22z" fill="#4e7a2c" stroke="#365a1c" stroke-width="2"/>
-               <path d="M32 11c-7 0-8 12-10 19c-3 12 1 24 10 24s13-12 10-24c-2-7-3-19-10-19z" fill="#d3e48e"/>
-               <circle cx="32" cy="41" r="9" fill="#9a693b"/><ellipse cx="29" cy="38" rx="3" ry="2" fill="#c08c5a"/>`;
+          d = `<path d="M32 5c-11 0-13 14-15 22c-5 15 2 32 15 32s20-17 15-32c-2-8-4-22-15-22z" fill="#5a8a33" stroke="#3a6420" stroke-width="2.5"/>
+               <path d="M32 10c-8 0-9 12-11 19c-3 13 1 25 11 25s14-12 11-25c-2-7-3-19-11-19z" fill="#dcec9a"/>
+               <circle cx="32" cy="43" r="8" fill="#a8743f"/><ellipse cx="29.5" cy="40.5" rx="2.5" ry="1.8" fill="#cf9c66"/>
+               ${caritaFruta(32, 27, 0.85, "#3a4a20")}`;
           break;
         case "choclo": {
           let granos = "";
-          for (let f = 0; f < 6; f++) for (let c = 0; c < 3; c++) granos += `<circle cx="${27 + c * 5}" cy="${14 + f * 6}" r="2.2" fill="#e2b326"/>`;
-          d = `<rect x="22" y="6" width="20" height="46" rx="10" fill="#f6d14a" stroke="#d1a71f" stroke-width="2"/>${granos}
-               <path d="M32 60c-14-6-17-24-12-38c2 14 6 26 12 38z" fill="#6aae46" stroke="#4b8a2e" stroke-width="1.5"/>
-               <path d="M32 60c14-6 17-24 12-38c-2 14-6 26-12 38z" fill="#7cc055" stroke="#4b8a2e" stroke-width="1.5"/>`;
+          for (let f = 0; f < 4; f++) for (let c = 0; c < 3; c++) granos += `<circle cx="${26 + c * 6}" cy="${11 + f * 5}" r="2.4" fill="#f0bf2a"/>`;
+          d = `<rect x="20" y="5" width="24" height="48" rx="12" fill="#ffd84f" stroke="#d6a91c" stroke-width="2.5"/>${granos}
+               ${caritaFruta(32, 34, 0.9)}
+               <path d="M32 61c-16-6-19-26-13-40c2 15 6 28 13 40z" fill="#78bc52" stroke="#4b8a2e" stroke-width="2"/>
+               <path d="M32 61c16-6 19-26 13-40c-2 15-6 28-13 40z" fill="#8acb62" stroke="#4b8a2e" stroke-width="2"/>`;
           break;
         }
         case "berenjena":
-          d = `<path d="M29 18c-12 4-17 22-9 34c8 10 26 8 29-5c3-12-4-24-11-29z" fill="#6b3d8f" stroke="#4e2a6b" stroke-width="2"/>
-               <path d="M24 22q8-10 18-4q-4 7-10 7q-4 0-8-3z" fill="#5f9e3a"/>
-               <path d="M34 15q1-6 5-9" fill="none" stroke="#4b8a2e" stroke-width="3" stroke-linecap="round"/>
-               <ellipse cx="24" cy="38" rx="3" ry="7" fill="#9a6fc0" transform="rotate(15 24 38)"/>`;
+          d = `<path d="M28 17c-13 4-19 23-10 36c9 11 29 9 32-5c3-13-5-26-12-31z" fill="#7c4aa3" stroke="#56307a" stroke-width="2.5"/>
+               <path d="M22 21q9-11 20-4q-4 8-11 8q-5 0-9-4z" fill="#6aae46" stroke="#4b8a2e" stroke-width="1.5"/>
+               <path d="M34 14q1-6 5-9" fill="none" stroke="#4b8a2e" stroke-width="3.5" stroke-linecap="round"/>
+               <ellipse cx="21" cy="36" rx="3" ry="6" fill="#a982cc" transform="rotate(15 21 36)"/>
+               ${caritaFruta(34, 41, 1, "#2e1840")}`;
           break;
         case "anana":
-          d = `<path d="M32 22l-4-14 4 6 2-10 2 10 5-7-3 15z" fill="#4f9a3a" stroke="#3a7a2a" stroke-width="1.5" stroke-linejoin="round"/>
-               <ellipse cx="32" cy="41" rx="14" ry="18" fill="#eab43c" stroke="#b9821c" stroke-width="2"/>
-               <path d="M22 32l20 16M20 42l14 12M26 26l18 14M42 32l-20 16M44 42l-14 12M38 26l-18 14" stroke="#c48d22" stroke-width="1.5"/>`;
+          d = `<path d="M32 23l-6-15 5 5 1-10 3 10 5-7-2 16z" fill="#58a83f" stroke="#3a7a2a" stroke-width="2" stroke-linejoin="round"/>
+               <ellipse cx="32" cy="42" rx="16" ry="19" fill="#f4bd45" stroke="#c28a1e" stroke-width="2.5"/>
+               <path d="M22 30l6 5M36 28l6 5M18 42l5 4M44 42l-5 4M24 54l4-3M40 54l-4-3" stroke="#d29a2a" stroke-width="2" stroke-linecap="round"/>
+               ${caritaFruta(32, 42)}`;
           break;
         case "melon":
-          d = `<circle cx="32" cy="35" r="22" fill="#e9d896" stroke="#b9a157" stroke-width="2"/>
-               <path d="M32 13v44M20 16q-8 19 0 38M44 16q8 19 0 38" fill="none" stroke="#c9b26a" stroke-width="2"/>
-               <path d="M32 13q0-5 4-7" fill="none" stroke="#7a5a2a" stroke-width="2.5" stroke-linecap="round"/>`;
+          d = `<circle cx="32" cy="36" r="23" fill="#f0df9e" stroke="#bea55a" stroke-width="2.5"/>
+               <path d="M16 22q-6 14 0 28M48 22q6 14 0 28" fill="none" stroke="#d6c07a" stroke-width="2.5" stroke-linecap="round"/>
+               <path d="M32 13q0-6 5-8" fill="none" stroke="#7a5a2a" stroke-width="3" stroke-linecap="round"/>
+               <path d="M36 8q7-4 11 2q-6 3-11-2z" fill="#79b85a"/>
+               ${caritaFruta(32, 37)}`;
           break;
         case "sandia":
-          d = `<ellipse cx="32" cy="35" rx="27" ry="21" fill="#4c9a40" stroke="#2f6e28" stroke-width="2"/>
-               <path d="M14 22q-4 13 0 26M24 15q-5 20 0 40M36 14q-5 21 0 42M48 17q-4 18 0 36" fill="none" stroke="#2f6e28" stroke-width="3" stroke-linecap="round"/>
-               <ellipse cx="20" cy="27" rx="5" ry="3" fill="#8cc87c" transform="rotate(-30 20 27)"/>`;
+          d = `<ellipse cx="32" cy="36" rx="28" ry="22" fill="#57a64a" stroke="#2f6e28" stroke-width="2.5"/>
+               <path d="M14 23q-4 13 0 26M50 23q4 13 0 26M24 16q-3 5-3 9M40 16q3 5 3 9" fill="none" stroke="#3a8034" stroke-width="3" stroke-linecap="round"/>
+               <ellipse cx="20" cy="27" rx="5" ry="3" fill="#a3d68f" transform="rotate(-30 20 27)"/>
+               ${caritaFruta(32, 38, 1.1, "#1f3f1a")}`;
           break;
       }
       return `<svg viewBox="0 0 64 64" aria-hidden="true">${d}</svg>`;
