@@ -482,6 +482,287 @@
       font-weight: 600;
     }
 
+    /* =========================================================
+       4c. MI DIARIO
+       ========================================================= */
+    .boton-grande {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 64px;
+      margin: 0 0 16px;
+      font-size: 19px;
+      box-shadow: 0 6px 16px rgba(194, 85, 122, 0.3);
+    }
+
+    .boton-grande svg { width: 26px; height: 26px; }
+
+    .titulo-con-dato { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+    .titulo-con-dato span { font-size: 14px; color: var(--texto-suave); white-space: nowrap; }
+
+    .vacio { margin-top: 10px; color: var(--texto-suave); font-size: 16px; }
+
+    /* Historial */
+    .registros { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 12px; }
+
+    .registro {
+      padding: 14px;
+      border-radius: 16px;
+      border: 2px solid var(--borde);
+      background: var(--blanco);
+    }
+
+    .registro-cabeza { display: flex; align-items: flex-start; gap: 10px; }
+    .registro-fecha { flex: 1; min-width: 0; }
+    .registro-fecha b { display: block; font-size: 16px; line-height: 1.3; }
+    .registro-fecha span { font-size: 14px; color: var(--texto-suave); }
+
+    .chip-semana {
+      display: inline-block;
+      margin-top: 4px;
+      padding: 2px 10px;
+      border-radius: 999px;
+      background: var(--lila-claro);
+      color: var(--lila);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .boton-borrar {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 12px;
+      background: none;
+      color: var(--texto-suave);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .boton-borrar svg { width: 22px; height: 22px; }
+    .boton-borrar:active { background: var(--alarma-claro); color: var(--alarma); }
+    .boton-borrar:focus-visible { outline: 3px solid var(--rosa); outline-offset: 1px; }
+
+    .registro-datos { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+
+    .registro-dato {
+      padding: 6px 10px;
+      border-radius: 10px;
+      background: var(--fondo);
+      font-size: 15px;
+    }
+
+    .registro-dato small { color: var(--texto-suave); font-weight: 600; margin-right: 4px; }
+    .registro-dato.alta { background: var(--alarma-claro); color: #8a1f1f; font-weight: 700; }
+
+    .registro-animo { display: inline-flex; align-items: center; gap: 6px; }
+    .registro-animo svg { width: 22px; height: 22px; }
+
+    .registro-sintomas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+    .registro-sintomas span { padding: 3px 10px; border-radius: 999px; background: var(--rosa-claro); color: var(--rosa-oscuro); font-size: 14px; font-weight: 600; }
+
+    .registro-nota { margin-top: 8px; font-size: 15px; white-space: pre-wrap; overflow-wrap: anywhere; }
+
+    .alerta-roja {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      margin-top: 10px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--alarma);
+      color: var(--blanco);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    .alerta-roja svg { width: 24px; height: 24px; flex-shrink: 0; }
+
+    /* Preguntas para mi médico */
+    .agregar-pregunta { display: flex; gap: 8px; margin-top: 12px; }
+
+    .agregar-pregunta input {
+      flex: 1;
+      min-width: 0;
+      min-height: 52px;
+      padding: 10px 14px;
+      border: 2px solid var(--borde);
+      border-radius: 14px;
+      font: inherit;
+      font-size: 16px;
+      color: var(--texto);
+    }
+
+    .agregar-pregunta input:focus { outline: none; border-color: var(--rosa); box-shadow: 0 0 0 3px var(--rosa-claro); }
+
+    .boton-chico {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 14px;
+      background: var(--rosa);
+      color: var(--blanco);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .boton-chico svg { width: 24px; height: 24px; }
+    .boton-chico:active { background: var(--rosa-oscuro); transform: scale(0.96); }
+
+    .preguntas { list-style: none; margin-top: 10px; }
+
+    .pregunta {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .pregunta:last-child { border-bottom: none; }
+
+    .pregunta label {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 8px 0;
+      cursor: pointer;
+    }
+
+    .pregunta input[type="checkbox"] { flex-shrink: 0; width: 26px; height: 26px; accent-color: var(--rosa); }
+    .pregunta span { font-size: 16px; line-height: 1.35; overflow-wrap: anywhere; }
+    .pregunta.hecha span { text-decoration: line-through; color: var(--texto-suave); }
+
+    .separador-hechas { margin-top: 12px; font-size: 13px; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: 0.8px; }
+
+    /* Hoja del formulario (sube desde abajo) */
+    .hoja-fondo {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: rgba(59, 42, 69, 0.45);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .hoja {
+      width: 100%;
+      max-width: 480px;
+      max-height: 92vh;
+      max-height: 92dvh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: var(--blanco);
+      border-radius: 24px 24px 0 0;
+      padding: 10px 20px calc(24px + env(safe-area-inset-bottom));
+      animation: subir-hoja 0.25s ease;
+    }
+
+    @keyframes subir-hoja { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+    .hoja-asa { width: 44px; height: 5px; margin: 0 auto 14px; border-radius: 999px; background: var(--borde); }
+    .hoja h2 { font-size: 22px; }
+
+    .grupo { border: none; margin-top: 18px; }
+    .grupo legend { font-weight: 700; margin-bottom: 6px; }
+    .grupo .campo { margin-top: 0; }
+    .grupo .campo > span { font-weight: 600; font-size: 15px; color: var(--texto-suave); }
+
+    .fila-campos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .campo-corto input { max-width: 200px; }
+
+    .campo textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 2px solid var(--borde);
+      border-radius: 14px;
+      font: inherit;
+      font-size: 16px;
+      color: var(--texto);
+      resize: vertical;
+    }
+
+    .campo textarea:focus { outline: none; border-color: var(--rosa); box-shadow: 0 0 0 3px var(--rosa-claro); }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .chip {
+      min-height: 46px;
+      padding: 8px 16px;
+      border: 2px solid var(--borde);
+      border-radius: 999px;
+      background: var(--blanco);
+      color: var(--texto);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .chip[aria-pressed="true"] { border-color: var(--rosa); background: var(--rosa-claro); color: var(--rosa-oscuro); }
+    .chip[aria-pressed="true"]::before { content: "✓ "; }
+    .chip:focus-visible, .carita:focus-visible { outline: 3px solid var(--lila); outline-offset: 2px; }
+
+    .input-otro {
+      width: 100%;
+      min-height: 50px;
+      margin-top: 10px;
+      padding: 8px 14px;
+      border: 2px solid var(--borde);
+      border-radius: 14px;
+      font: inherit;
+      font-size: 16px;
+    }
+
+    .caritas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+
+    .carita {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      min-height: 92px;
+      padding: 10px 4px;
+      border: 2px solid var(--borde);
+      border-radius: 16px;
+      background: var(--blanco);
+      color: var(--texto);
+      font: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .carita svg { width: 44px; height: 44px; }
+    .carita[aria-checked="true"].bien    { border-color: #2e9d6a; background: #e8f6ef; }
+    .carita[aria-checked="true"].regular { border-color: var(--ambar); background: #fff6e0; }
+    .carita[aria-checked="true"].mal     { border-color: var(--lila); background: var(--lila-claro); }
+
+    .boton-texto {
+      display: block;
+      width: 100%;
+      min-height: 50px;
+      margin-top: 6px;
+      border: none;
+      background: none;
+      color: var(--texto-suave);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
     [hidden] { display: none !important; }
 
     /* =========================================================
@@ -594,17 +875,37 @@
 
       <!-- Sección 1: Mi diario (la principal, se abre al iniciar) -->
       <section id="diario" class="seccion activa">
-        <div class="tarjeta">
-          <div class="icono-grande">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/>
-              <path d="M4 21.5A2.5 2.5 0 0 1 6.5 19H20v3H6.5"/>
-              <path d="M12 13.5s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/>
-            </svg>
+
+        <!-- Botón principal: abre el formulario de registro -->
+        <button type="button" class="boton boton-grande" id="btn-agregar-registro">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+          Agregar registro
+        </button>
+
+        <!-- Historial de registros (lo arma el JavaScript) -->
+        <div class="panel">
+          <div class="titulo-con-dato">
+            <h3>Mis registros</h3>
+            <span id="diario-cantidad"></span>
           </div>
-          <span class="etiqueta">Próximamente</span>
-          <h2>Mi diario</h2>
-          <p>Vas a poder anotar cada día cómo te sentís, tus síntomas y lo que quieras recordar para tu próxima consulta.</p>
+          <p class="vacio" id="diario-vacio">Todavía no anotaste nada. Tocá <b>"Agregar registro"</b> para empezar tu diario.</p>
+          <ul class="registros" id="lista-registros"></ul>
+        </div>
+
+        <!-- Preguntas para mi médico -->
+        <div class="panel">
+          <div class="titulo-con-dato">
+            <h3>Preguntas para mi médico</h3>
+            <span id="preguntas-cantidad"></span>
+          </div>
+          <p class="ayuda">Anotá tus dudas y tildalas cuando ya las preguntaste en la consulta.</p>
+          <form class="agregar-pregunta" id="form-pregunta" novalidate>
+            <input id="pregunta-texto" type="text" maxlength="200" autocomplete="off" placeholder="Ej: ¿Puedo seguir haciendo gimnasia?" aria-label="Nueva pregunta">
+            <button type="submit" class="boton-chico" aria-label="Agregar pregunta">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </form>
+          <ul class="preguntas" id="lista-preguntas"></ul>
         </div>
       </section>
 
@@ -773,6 +1074,79 @@
         Alarma
       </button>
     </nav>
+
+    <!-- ===================== FORMULARIO DE REGISTRO (Mi diario) ===================== -->
+    <!-- Hoja que sube desde abajo. Todos los campos son opcionales. -->
+    <div class="hoja-fondo" id="registro-fondo" hidden>
+      <form class="hoja" id="form-registro" novalidate role="dialog" aria-modal="true" aria-labelledby="registro-titulo">
+        <div class="hoja-asa"></div>
+        <h2 id="registro-titulo">Nuevo registro</h2>
+        <p class="ayuda">Completá solo lo que quieras. Todo es opcional.</p>
+
+        <!-- Presión arterial -->
+        <fieldset class="grupo">
+          <legend>Presión arterial</legend>
+          <div class="fila-campos">
+            <label class="campo">
+              <span>Máxima</span>
+              <input id="reg-pas" type="number" inputmode="numeric" min="60" max="260" placeholder="Ej: 110">
+            </label>
+            <label class="campo">
+              <span>Mínima</span>
+              <input id="reg-pad" type="number" inputmode="numeric" min="30" max="160" placeholder="Ej: 70">
+            </label>
+          </div>
+          <small class="pista">Si te dijeron "11 y 7", la máxima es 110 y la mínima 70.</small>
+          <!-- Aparece si la presión está alta -->
+          <div class="alerta-roja" id="reg-alerta-presion" role="alert" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+            <span>Tu presión está alta. Consultá hoy en la guardia o en tu centro de salud.</span>
+          </div>
+          <span class="pendiente-validacion">Valores de alerta pendientes de validación por Obstetricia</span>
+        </fieldset>
+
+        <!-- Peso -->
+        <label class="campo campo-corto">
+          <span>Peso (kg)</span>
+          <input id="reg-peso" type="text" inputmode="decimal" autocomplete="off" placeholder="Ej: 64,5">
+        </label>
+
+        <!-- Síntomas -->
+        <fieldset class="grupo">
+          <legend>Síntomas</legend>
+          <div class="chips" id="reg-sintomas">
+            <button type="button" class="chip" aria-pressed="false" data-valor="nauseas">Náuseas</button>
+            <button type="button" class="chip" aria-pressed="false" data-valor="hinchazon">Hinchazón</button>
+            <button type="button" class="chip" aria-pressed="false" data-valor="dolor-cabeza">Dolor de cabeza</button>
+            <button type="button" class="chip" aria-pressed="false" data-valor="contracciones">Contracciones</button>
+            <button type="button" class="chip" aria-pressed="false" data-valor="acidez">Acidez</button>
+            <button type="button" class="chip" aria-pressed="false" data-valor="cansancio">Cansancio</button>
+            <button type="button" class="chip" aria-pressed="false" data-valor="otro">Otro</button>
+          </div>
+          <input id="reg-otro" class="input-otro" type="text" maxlength="60" autocomplete="off" placeholder="¿Cuál? (opcional)" aria-label="Otro síntoma" hidden>
+        </fieldset>
+
+        <!-- Cómo me siento -->
+        <fieldset class="grupo">
+          <legend>¿Cómo me siento?</legend>
+          <div class="caritas" id="reg-animo" role="radiogroup" aria-label="Cómo me siento">
+            <button type="button" class="carita bien"    role="radio" aria-checked="false" data-valor="bien">Bien</button>
+            <button type="button" class="carita regular" role="radio" aria-checked="false" data-valor="regular">Regular</button>
+            <button type="button" class="carita mal"     role="radio" aria-checked="false" data-valor="mal">Mal</button>
+          </div>
+        </fieldset>
+
+        <!-- Nota libre -->
+        <label class="campo">
+          <span>Nota</span>
+          <textarea id="reg-nota" rows="3" maxlength="500" placeholder="Lo que quieras anotar…"></textarea>
+        </label>
+
+        <p class="error" id="reg-error" role="alert"></p>
+        <button type="submit" class="boton">Guardar registro</button>
+        <button type="button" class="boton-texto" id="reg-cancelar">Cancelar</button>
+      </form>
+    </div>
 
   </div>
 
@@ -1268,7 +1642,300 @@
 
 
     // =========================================================
-    // 8. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
+    // 8. MI DIARIO
+    // =========================================================
+
+    // ---------- 8.1 Valores de alerta ----------
+    // ⚠ PENDIENTE DE VALIDACIÓN POR OBSTETRICIA: umbrales de presión alta en el embarazo.
+    const PRESION_ALTA = { maxima: 140, minima: 90 };   // alerta si máxima ≥ 140 o mínima ≥ 90
+
+    const presionAlta = (pas, pad) => (pas != null && pas >= PRESION_ALTA.maxima) || (pad != null && pad >= PRESION_ALTA.minima);
+
+    const SINTOMAS = {
+      "nauseas": "Náuseas", "hinchazon": "Hinchazón", "dolor-cabeza": "Dolor de cabeza",
+      "contracciones": "Contracciones", "acidez": "Acidez", "cansancio": "Cansancio", "otro": "Otro"
+    };
+    const ANIMOS = { bien: "Bien", regular: "Regular", mal: "Mal" };
+
+    // ---------- 8.2 Guardado (localStorage) ----------
+    // registros: [{ id, fecha: "2026-11-05T14:32:00.000Z", semana: 23 | null, pas, pad, peso,
+    //               sintomas: ["nauseas"], otro: "", animo: "bien" | "regular" | "mal" | null, nota: "" }]
+    // preguntas: [{ id, texto, hecha: false }]
+    const CLAVE_DIARIO = "mamasegui.diario";
+    const CLAVE_PREGUNTAS = "mamasegui.preguntas";
+
+    function leerLista(clave) {
+      try { const v = JSON.parse(localStorage.getItem(clave)); return Array.isArray(v) ? v : []; }
+      catch { return []; }
+    }
+
+    function guardarLista(clave, lista) {
+      try { localStorage.setItem(clave, JSON.stringify(lista)); return true; }
+      catch { alert("No se pudo guardar en este celular (puede estar en modo privado)."); return false; }
+    }
+
+    const nuevoId = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+    // Crea un elemento con clase y texto (el texto de la usuaria siempre va como texto, nunca como HTML)
+    function el(etiqueta, clase, texto) {
+      const e = document.createElement(etiqueta);
+      if (clase) e.className = clase;
+      if (texto != null) e.textContent = texto;
+      return e;
+    }
+
+    // Caritas tiernas (bien / regular / mal)
+    function svgAnimo(tipo) {
+      const colores = { bien: ["#e8f6ef", "#2e9d6a"], regular: ["#fff6e0", "#b7791f"], mal: ["#f1ebf8", "#7d5ba6"] }[tipo];
+      const boca = { bien: "M8 14.5q4 3.5 8 0", regular: "M8.5 15h7", mal: "M8 16q4-3.5 8 0" }[tipo];
+      return `<svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="10" fill="${colores[0]}" stroke="${colores[1]}" stroke-width="1.8"/>
+        <circle cx="8.5" cy="10" r="1.3" fill="${colores[1]}"/><circle cx="15.5" cy="10" r="1.3" fill="${colores[1]}"/>
+        <circle cx="6.5" cy="13.5" r="1.6" fill="#ff9db4" opacity="0.6"/><circle cx="17.5" cy="13.5" r="1.6" fill="#ff9db4" opacity="0.6"/>
+        <path d="${boca}" fill="none" stroke="${colores[1]}" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>`;
+    }
+
+    const ICONO_BORRAR = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2M6 6l1 14h10l1-14M10 11v6M14 11v6"/></svg>`;
+
+    // ---------- 8.3 Formulario ----------
+    const fondoRegistro = document.getElementById("registro-fondo");
+    const formRegistro  = document.getElementById("form-registro");
+    const inputPas      = document.getElementById("reg-pas");
+    const inputPad      = document.getElementById("reg-pad");
+    const inputPeso     = document.getElementById("reg-peso");
+    const inputOtro     = document.getElementById("reg-otro");
+    const inputNota     = document.getElementById("reg-nota");
+    const errorRegistro = document.getElementById("reg-error");
+    const alertaPresion = document.getElementById("reg-alerta-presion");
+    const chipsSintomas = document.querySelectorAll("#reg-sintomas .chip");
+    const botonesAnimo  = document.querySelectorAll("#reg-animo .carita");
+
+    // Dibuja las caritas dentro de los botones
+    botonesAnimo.forEach(b => b.insertAdjacentHTML("afterbegin", svgAnimo(b.dataset.valor)));
+
+    // "12" -> 12 ; "64,5" -> 64.5 ; "" -> null
+    function leerNumero(input) {
+      const texto = input.value.trim().replace(",", ".");
+      if (texto === "") return null;
+      const n = Number(texto);
+      return Number.isFinite(n) ? n : NaN;
+    }
+
+    function revisarPresion() {
+      const pas = leerNumero(inputPas), pad = leerNumero(inputPad);
+      alertaPresion.hidden = !presionAlta(Number.isNaN(pas) ? null : pas, Number.isNaN(pad) ? null : pad);
+    }
+
+    formRegistro.addEventListener("input", () => { errorRegistro.textContent = ""; });   // borra el error al corregir
+    inputPas.addEventListener("input", revisarPresion);
+    inputPad.addEventListener("input", revisarPresion);
+
+    chipsSintomas.forEach(chip => chip.addEventListener("click", () => {
+      const activo = chip.getAttribute("aria-pressed") !== "true";
+      chip.setAttribute("aria-pressed", activo);
+      if (chip.dataset.valor === "otro") {
+        inputOtro.hidden = !activo;
+        if (activo) inputOtro.focus(); else inputOtro.value = "";
+      }
+    }));
+
+    // Caritas: tocar elige; tocar la misma de nuevo la desmarca (todo es opcional)
+    botonesAnimo.forEach(b => b.addEventListener("click", () => {
+      const yaElegida = b.getAttribute("aria-checked") === "true";
+      botonesAnimo.forEach(o => o.setAttribute("aria-checked", "false"));
+      if (!yaElegida) b.setAttribute("aria-checked", "true");
+    }));
+
+    function abrirRegistro() {
+      formRegistro.reset();
+      chipsSintomas.forEach(c => c.setAttribute("aria-pressed", "false"));
+      botonesAnimo.forEach(b => b.setAttribute("aria-checked", "false"));
+      inputOtro.hidden = true;
+      alertaPresion.hidden = true;
+      errorRegistro.textContent = "";
+      fondoRegistro.hidden = false;
+      document.body.style.overflow = "hidden";   // que no se mueva la pantalla de atrás
+      formRegistro.scrollTop = 0;
+    }
+
+    function cerrarRegistro() {
+      fondoRegistro.hidden = true;
+      document.body.style.overflow = "";
+      document.getElementById("btn-agregar-registro").focus();
+    }
+
+    document.getElementById("btn-agregar-registro").addEventListener("click", abrirRegistro);
+    document.getElementById("reg-cancelar").addEventListener("click", cerrarRegistro);
+    fondoRegistro.addEventListener("click", e => { if (e.target === fondoRegistro) cerrarRegistro(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && !fondoRegistro.hidden) cerrarRegistro(); });
+
+    formRegistro.addEventListener("submit", evento => {
+      evento.preventDefault();
+      errorRegistro.textContent = "";
+      const pas = leerNumero(inputPas), pad = leerNumero(inputPad), peso = leerNumero(inputPeso);
+
+      // La presión va de a dos: si completa una, tiene que completar la otra
+      if ((pas == null) !== (pad == null)) { errorRegistro.textContent = "Para la presión, completá la máxima y la mínima."; return; }
+      if (pas != null && (Number.isNaN(pas) || Number.isNaN(pad) || pas < 60 || pas > 260 || pad < 30 || pad > 160 || pad >= pas)) {
+        errorRegistro.textContent = "Revisá la presión: por ejemplo, máxima 110 y mínima 70."; return;
+      }
+      if (peso != null && (Number.isNaN(peso) || peso < 30 || peso > 250)) { errorRegistro.textContent = "Revisá el peso (en kilos, por ejemplo 64,5)."; return; }
+
+      const sintomas = [...chipsSintomas].filter(c => c.getAttribute("aria-pressed") === "true").map(c => c.dataset.valor);
+      const elegida = [...botonesAnimo].find(b => b.getAttribute("aria-checked") === "true");
+      const nota = inputNota.value.trim();
+
+      if (pas == null && peso == null && !sintomas.length && !elegida && !nota) {
+        errorRegistro.textContent = "Completá al menos un dato para guardar el registro."; return;
+      }
+
+      // Semana de embarazo de hoy (de la sección "Mi embarazo"), si cargó la fecha
+      const embarazo = leerEmbarazo();
+      const semana = embarazo && embarazo.fum ? Math.min(calcularEmbarazo(embarazo.fum).semanaEnCurso, 42) : null;
+
+      const registros = leerLista(CLAVE_DIARIO);
+      registros.push({
+        id: nuevoId(), fecha: new Date().toISOString(), semana,
+        pas, pad, peso: peso == null ? null : Math.round(peso * 10) / 10,
+        sintomas, otro: sintomas.includes("otro") ? inputOtro.value.trim() : "",
+        animo: elegida ? elegida.dataset.valor : null, nota
+      });
+      if (!guardarLista(CLAVE_DIARIO, registros)) return;
+      cerrarRegistro();
+      renderRegistros();
+    });
+
+    // ---------- 8.4 Historial ----------
+    const listaRegistros = document.getElementById("lista-registros");
+
+    function renderRegistros() {
+      const registros = leerLista(CLAVE_DIARIO).sort((a, b) => b.fecha.localeCompare(a.fecha));   // más nuevo primero
+      listaRegistros.innerHTML = "";
+      document.getElementById("diario-vacio").hidden = registros.length > 0;
+      document.getElementById("diario-cantidad").textContent = registros.length ? plural(registros.length, "registro", "registros") : "";
+
+      registros.forEach(r => {
+        const fecha = new Date(r.fecha);
+        const li = el("li", "registro");
+
+        // Cabecera: fecha, hora, semana y botón borrar
+        const cabeza = el("div", "registro-cabeza");
+        const textoFecha = el("div", "registro-fecha");
+        const dia = fecha.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" });
+        textoFecha.append(el("b", null, dia.charAt(0).toUpperCase() + dia.slice(1)));
+        textoFecha.append(el("span", null, fecha.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit", hour12: false }) + " h"));
+        if (r.semana) { textoFecha.append(el("br")); textoFecha.append(el("span", "chip-semana", `Semana ${r.semana}`)); }
+        const borrar = el("button", "boton-borrar");
+        borrar.type = "button";
+        borrar.innerHTML = ICONO_BORRAR;
+        borrar.setAttribute("aria-label", `Borrar el registro del ${dia}`);
+        borrar.addEventListener("click", () => borrarRegistro(r.id));
+        cabeza.append(textoFecha, borrar);
+        li.append(cabeza);
+
+        // Datos: presión, peso, cómo me siento
+        const datos = el("div", "registro-datos");
+        const alta = r.pas != null && presionAlta(r.pas, r.pad);
+        if (r.pas != null) {
+          const d = el("span", "registro-dato" + (alta ? " alta" : ""));
+          d.append(el("small", null, "Presión"), document.createTextNode(`${r.pas}/${r.pad}` + (alta ? " · alta" : "")));
+          datos.append(d);
+        }
+        if (r.peso != null) {
+          const d = el("span", "registro-dato");
+          d.append(el("small", null, "Peso"), document.createTextNode(`${String(r.peso).replace(".", ",")} kg`));
+          datos.append(d);
+        }
+        if (r.animo) {
+          const d = el("span", "registro-dato registro-animo");
+          d.innerHTML = svgAnimo(r.animo);
+          d.append(document.createTextNode(ANIMOS[r.animo]));
+          datos.append(d);
+        }
+        if (datos.children.length) li.append(datos);
+
+        if (alta) {
+          const aviso = el("div", "alerta-roja");
+          aviso.append(el("span", null, "Tu presión está alta. Consultá hoy en la guardia o en tu centro de salud."));
+          li.append(aviso);
+        }
+
+        if (r.sintomas && r.sintomas.length) {
+          const s = el("div", "registro-sintomas");
+          r.sintomas.forEach(k => s.append(el("span", null, k === "otro" && r.otro ? r.otro : SINTOMAS[k] || k)));
+          li.append(s);
+        }
+
+        if (r.nota) li.append(el("p", "registro-nota", r.nota));
+        listaRegistros.append(li);
+      });
+    }
+
+    function borrarRegistro(id) {
+      if (!confirm("¿Borrar este registro? No se puede deshacer.")) return;
+      guardarLista(CLAVE_DIARIO, leerLista(CLAVE_DIARIO).filter(r => r.id !== id));
+      renderRegistros();
+    }
+
+    // ---------- 8.5 Preguntas para mi médico ----------
+    const listaPreguntas = document.getElementById("lista-preguntas");
+    const inputPregunta  = document.getElementById("pregunta-texto");
+
+    function renderPreguntas() {
+      const preguntas = leerLista(CLAVE_PREGUNTAS);
+      const pendientes = preguntas.filter(p => !p.hecha), hechas = preguntas.filter(p => p.hecha);
+      listaPreguntas.innerHTML = "";
+      document.getElementById("preguntas-cantidad").textContent = pendientes.length ? `${pendientes.length} por preguntar` : "";
+
+      const crear = p => {
+        const li = el("li", "pregunta" + (p.hecha ? " hecha" : ""));
+        const label = el("label");
+        const check = el("input");
+        check.type = "checkbox";
+        check.checked = p.hecha;
+        check.addEventListener("change", () => {
+          guardarLista(CLAVE_PREGUNTAS, leerLista(CLAVE_PREGUNTAS).map(q => q.id === p.id ? { ...q, hecha: check.checked } : q));
+          renderPreguntas();
+        });
+        label.append(check, el("span", null, p.texto));
+        const borrar = el("button", "boton-borrar");
+        borrar.type = "button";
+        borrar.innerHTML = ICONO_BORRAR;
+        borrar.setAttribute("aria-label", `Borrar la pregunta: ${p.texto}`);
+        borrar.addEventListener("click", () => {
+          guardarLista(CLAVE_PREGUNTAS, leerLista(CLAVE_PREGUNTAS).filter(q => q.id !== p.id));
+          renderPreguntas();
+        });
+        li.append(label, borrar);
+        return li;
+      };
+
+      pendientes.forEach(p => listaPreguntas.append(crear(p)));
+      if (hechas.length) {
+        listaPreguntas.append(el("li", "separador-hechas", "Ya preguntadas"));
+        hechas.forEach(p => listaPreguntas.append(crear(p)));
+      }
+    }
+
+    document.getElementById("form-pregunta").addEventListener("submit", evento => {
+      evento.preventDefault();
+      const texto = inputPregunta.value.trim();
+      if (!texto) { inputPregunta.focus(); return; }
+      const preguntas = leerLista(CLAVE_PREGUNTAS);
+      preguntas.push({ id: nuevoId(), texto, hecha: false });
+      if (!guardarLista(CLAVE_PREGUNTAS, preguntas)) return;
+      inputPregunta.value = "";
+      renderPreguntas();
+      inputPregunta.focus();
+    });
+
+    renderRegistros();
+    renderPreguntas();
+
+
+    // =========================================================
+    // 9. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
     // =========================================================
     if ("serviceWorker" in navigator && window.isSecureContext && location.protocol !== "file:") {
       window.addEventListener("load", () => {
