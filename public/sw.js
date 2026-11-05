@@ -6,7 +6,7 @@
 // Así los celulares que ya la tienen instalada descargan la versión nueva.
 // =========================================================
 
-const VERSION = "mamasegui-v4";
+const VERSION = "mamasegui-v5";
 
 // Archivos de la app que se guardan al instalar
 const ARCHIVOS = [
