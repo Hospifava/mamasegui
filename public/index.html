@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- viewport-fit=cover permite usar el área completa en celulares con "notch" -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="MamaSegui: acompañamiento del embarazo y los primeros meses del bebé, del Hospital Dr. René Favaloro.">
+  <!-- Ícono de la pestaña (cochecito de bebé), en SVG dentro del mismo archivo -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23c2557a' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5h2.5l2 7h11a6.5 6.5 0 0 0-6.5-6.5H11V12'/%3E%3Ccircle cx='9' cy='18' r='2'/%3E%3Ccircle cx='17' cy='18' r='2'/%3E%3C/svg%3E">
+  <!-- PWA: datos de instalación (nombre, íconos, colores) -->
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-title" content="MamaSegui">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <title>MamaSegui</title>
+
+  <style>
+    /* =========================================================
+       1. VARIABLES DE DISEÑO (colores, tamaños, sombras)
+       Misma estructura que CardioSegui, con colores suaves rosa/lila.
+       ========================================================= */
+    :root {
+      --celeste:     #179ee3;   /* franja bajo el logo (igual en todas las apps del hospital) */
+      --rosa:        #c2557a;   /* color principal de MamaSegui (el mismo de su tarjeta en Hospifava) */
+      --rosa-oscuro: #9c3d61;
+      --rosa-claro:  #fbecf1;   /* fondo de acentos */
+      --lila:        #7d5ba6;
+      --lila-claro:  #f1ebf8;
+      --blanco:      #ffffff;
+      --fondo:       #faf6f9;   /* fondo general, blanco rosado */
+      --texto:       #3b2a45;   /* ciruela oscuro */
+      --texto-suave: #6f6577;
+      --borde:       #eee3eb;
+      --alarma:      #d03a3a;   /* rojo de la sección "Alarma" */
+      --alarma-claro:#fde8e8;
+      --ambar:       #b7791f;
+
+      --radio:       18px;
+      --sombra:      0 4px 18px rgba(59, 42, 69, 0.08);
+      --alto-nav:    76px;
+    }
+
+    /* =========================================================
+       2. BASE: reseteo y tipografía
+       ========================================================= */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      font-size: 17px;
+      line-height: 1.5;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* Contenedor: pantalla completa en el celular, centrado en la computadora */
+    .app {
+      max-width: 480px;
+      min-height: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =========================================================
+       3. ENCABEZADO
+       ========================================================= */
+    /* Franja blanca con el logo del hospital y el botón "Apps" */
+    .barra-logo {
+      background: var(--blanco);
+      padding: calc(12px + env(safe-area-inset-top)) 18px 12px;
+      border-bottom: 4px solid var(--celeste);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .barra-logo img { display: block; flex: 1; min-width: 0; width: 100%; max-width: 340px; height: auto; }
+
+    /* Botón para volver a Hospifava (la app central con todas las apps) */
+    .volver-apps {
+      flex-shrink: 0;
+      margin-left: auto;
+      min-width: 52px;
+      min-height: 52px;
+      padding: 4px 6px;
+      border-radius: 14px;
+      background: var(--rosa-claro);
+      color: var(--rosa-oscuro);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .volver-apps svg { width: 22px; height: 22px; }
+    .volver-apps:active { transform: scale(0.95); }
+    .volver-apps:focus-visible { outline: 3px solid var(--rosa); outline-offset: 2px; }
+
+    /* Bloque de color con el nombre de la app y el título de la sección */
+    .encabezado {
+      background: linear-gradient(135deg, var(--rosa), var(--lila));
+      color: var(--blanco);
+      padding: 20px 22px 26px;
+      border-radius: 0 0 28px 28px;
+      box-shadow: var(--sombra);
+      transition: background 0.3s;
+    }
+
+    /* En la sección Alarma el encabezado se pone rojo */
+    .encabezado.alarma { background: linear-gradient(135deg, #b8322f, var(--alarma)); }
+
+    .marca { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; letter-spacing: 0.3px; opacity: 0.95; }
+    .marca svg { width: 26px; height: 26px; }
+    .encabezado h1 { margin-top: 14px; font-size: 28px; font-weight: 700; line-height: 1.2; }
+    .encabezado p  { margin-top: 4px; font-size: 16px; opacity: 0.92; }
+
+    /* =========================================================
+       4. CONTENIDO Y SECCIONES
+       Solo la sección con la clase "activa" se muestra.
+       ========================================================= */
+    main { flex: 1; padding: 22px 18px calc(var(--alto-nav) + 28px + env(safe-area-inset-bottom)); }
+
+    .seccion { display: none; animation: aparecer 0.25s ease; }
+    .seccion.activa { display: block; }
+
+    @keyframes aparecer {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Tarjeta de "Próximamente" */
+    .tarjeta {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      padding: 34px 24px;
+      text-align: center;
+      /* Cada sección puede cambiar su color con --c y --c-claro */
+      --c: var(--rosa);
+      --c-claro: var(--rosa-claro);
+    }
+
+    .tarjeta.lila   { --c: var(--lila);   --c-claro: var(--lila-claro); }
+    .tarjeta.alarma { --c: var(--alarma); --c-claro: var(--alarma-claro); border-top: 6px solid var(--alarma); }
+
+    .icono-grande {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: var(--c-claro);
+      color: var(--c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icono-grande svg { width: 42px; height: 42px; }
+
+    .etiqueta {
+      display: inline-block;
+      background: var(--c-claro);
+      color: var(--texto);
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 14px;
+    }
+
+    .tarjeta h2 { font-size: 24px; margin-bottom: 8px; }
+    .tarjeta p  { color: var(--texto-suave); font-size: 17px; }
+
+    /* Aviso de emergencia (en la sección Alarma) */
+    .aviso-emergencia {
+      margin-top: 18px;
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--alarma-claro);
+      color: #7a1f1f;
+      font-size: 16px;
+      line-height: 1.45;
+      text-align: left;
+    }
+
+    .telefonos { display: flex; gap: 10px; margin-top: 12px; }
+
+    .telefonos a {
+      flex: 1;
+      min-height: 56px;
+      border-radius: 14px;
+      background: var(--alarma);
+      color: var(--blanco);
+      font-size: 20px;
+      font-weight: 700;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .telefonos a svg { width: 22px; height: 22px; }
+    .telefonos a:active { transform: scale(0.98); background: #b8322f; }
+
+    /* Aviso general (orientativo) */
+    .aviso-info {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      margin-top: 18px;
+      padding: 14px 16px;
+      border: 2px solid #f0d58c;
+      border-radius: 16px;
+      background: #fff8e6;
+      color: #5c4300;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .aviso-info svg { width: 24px; height: 24px; flex-shrink: 0; color: var(--ambar); margin-top: 1px; }
+
+    [hidden] { display: none !important; }
+
+    /* =========================================================
+       5. BARRA DE NAVEGACIÓN INFERIOR (fija abajo, 4 botones)
+       ========================================================= */
+    .nav-inferior {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 480px;
+      height: calc(var(--alto-nav) + env(safe-area-inset-bottom));
+      padding-bottom: env(safe-area-inset-bottom);
+      background: var(--blanco);
+      border-top: 1px solid var(--borde);
+      box-shadow: 0 -4px 18px rgba(59, 42, 69, 0.06);
+      display: flex;
+      z-index: 10;
+    }
+
+    .nav-boton {
+      flex: 1;                        /* los 4 botones ocupan el mismo ancho */
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      border: none;
+      background: none;
+      color: var(--texto-suave);
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.15;
+      text-align: center;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .nav-boton svg {
+      width: 28px;
+      height: 28px;
+      padding: 4px 14px;
+      box-sizing: content-box;
+      border-radius: 999px;
+      transition: background 0.2s;
+    }
+
+    /* Estado activo: ícono con fondo rosa claro y texto rosa */
+    .nav-boton.activo { color: var(--rosa-oscuro); }
+    .nav-boton.activo svg { background: var(--rosa-claro); }
+
+    /* Alarma: siempre en rojo, para encontrarla rápido */
+    .nav-boton.alarma { color: var(--alarma); font-weight: 700; }
+    .nav-boton.alarma svg { background: var(--alarma); color: var(--blanco); }
+    .nav-boton.alarma.activo svg { box-shadow: 0 0 0 3px var(--alarma-claro); }
+
+    .nav-boton:focus-visible { outline: 3px solid var(--rosa); outline-offset: -6px; border-radius: 12px; }
+
+    /* Celulares angostos (≤ 360 px) */
+    @media (max-width: 360px) {
+      main { padding-left: 12px; padding-right: 12px; }
+      .nav-boton { font-size: 12px; }
+      .nav-boton svg { padding: 4px 10px; }
+    }
+
+    /* Si el usuario pidió menos movimiento en su celular, se apagan las animaciones */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+
+    <!-- ===================== LOGO DEL HOSPITAL ===================== -->
+    <div class="barra-logo">
+      <img src="logo-favaloro.png" alt="Hospital General de Agudos Dr. René Favaloro" width="425" height="67">
+      <!-- Vuelve a la app central Hospifava (en iPhone, las apps instaladas no tienen botón "atrás") -->
+      <a class="volver-apps" href="/" aria-label="Volver a Hospifava, todas las apps">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/>
+          <rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>
+        </svg>
+        Apps
+      </a>
+    </div>
+
+    <!-- ===================== ENCABEZADO ===================== -->
+    <header class="encabezado" id="encabezado">
+      <div class="marca">
+        <!-- Ícono de cochecito de bebé -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 5h2.5l2 7h11a6.5 6.5 0 0 0-6.5-6.5H11V12"/>
+          <circle cx="9" cy="18" r="2"/>
+          <circle cx="17" cy="18" r="2"/>
+        </svg>
+        MamaSegui
+      </div>
+      <!-- Este título cambia según la sección (lo actualiza el JavaScript) -->
+      <h1 id="titulo">Mi diario</h1>
+      <p id="subtitulo">Cómo te sentís hoy</p>
+    </header>
+
+    <!-- ===================== CONTENIDO ===================== -->
+    <main>
+
+      <!-- Sección 1: Mi diario (la principal, se abre al iniciar) -->
+      <section id="diario" class="seccion activa">
+        <div class="tarjeta">
+          <div class="icono-grande">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/>
+              <path d="M4 21.5A2.5 2.5 0 0 1 6.5 19H20v3H6.5"/>
+              <path d="M12 13.5s-3-1.8-3-3.8a1.6 1.6 0 0 1 3-.8 1.6 1.6 0 0 1 3 .8c0 2-3 3.8-3 3.8z"/>
+            </svg>
+          </div>
+          <span class="etiqueta">Próximamente</span>
+          <h2>Mi diario</h2>
+          <p>Vas a poder anotar cada día cómo te sentís, tus síntomas y lo que quieras recordar para tu próxima consulta.</p>
+        </div>
+      </section>
+
+      <!-- Sección 2: Mi embarazo -->
+      <section id="embarazo" class="seccion">
+        <div class="tarjeta lila">
+          <div class="icono-grande">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 5h2.5l2 7h11a6.5 6.5 0 0 0-6.5-6.5H11V12"/>
+              <circle cx="9" cy="18" r="2"/>
+              <circle cx="17" cy="18" r="2"/>
+            </svg>
+          </div>
+          <span class="etiqueta">Próximamente</span>
+          <h2>Mi embarazo</h2>
+          <p>Vas a poder seguir tu embarazo semana a semana: cuánto falta para la fecha probable de parto y cómo va creciendo tu bebé.</p>
+        </div>
+      </section>
+
+      <!-- Sección 3: Mis controles -->
+      <section id="controles" class="seccion">
+        <div class="tarjeta">
+          <div class="icono-grande">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="5" y="4" width="14" height="18" rx="2"/>
+              <path d="M9 2h6v4H9z"/>
+              <path d="M9 13l2 2 4-4"/>
+            </svg>
+          </div>
+          <span class="etiqueta">Próximamente</span>
+          <h2>Mis controles</h2>
+          <p>Vas a poder registrar tus turnos, ecografías, análisis y vacunas, y ver cuáles te tocan.</p>
+        </div>
+      </section>
+
+      <!-- Sección 4: Alarma (destacada en rojo) -->
+      <section id="alarma" class="seccion">
+        <div class="tarjeta alarma">
+          <div class="icono-grande">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
+              <path d="M12 6v4"/><path d="M12 13h.01"/>
+            </svg>
+          </div>
+          <span class="etiqueta">Próximamente</span>
+          <h2>Alarma</h2>
+          <p>Vas a poder revisar las señales de alarma del embarazo y saber cuándo consultar de urgencia.</p>
+
+          <!-- Visible desde ya: los teléfonos de emergencia -->
+          <div class="aviso-emergencia" role="note">
+            <strong>Ante una emergencia no esperes:</strong> llamá ya o acercate a la guardia del hospital.
+            <div class="telefonos">
+              <a href="tel:107">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+                107
+              </a>
+              <a href="tel:911">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+                911
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Aviso visible en todas las secciones -->
+      <div class="aviso-info" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><path d="M12 16v-5"/><path d="M12 8h.01"/>
+        </svg>
+        <div>
+          MamaSegui es <strong>orientativa</strong> y <strong>no reemplaza los controles con tu médico u obstétrica</strong>.
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ===================== BARRA INFERIOR ===================== -->
+    <!-- data-seccion indica qué <section> muestra cada botón -->
+    <nav class="nav-inferior" aria-label="Navegación principal">
+      <button class="nav-boton activo" data-seccion="diario" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v17H6.5A2.5 2.5 0 0 0 4 21.5z"/>
+          <path d="M4 21.5A2.5 2.5 0 0 1 6.5 19H20v3H6.5"/>
+        </svg>
+        Mi diario
+      </button>
+      <button class="nav-boton" data-seccion="embarazo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 5h2.5l2 7h11a6.5 6.5 0 0 0-6.5-6.5H11V12"/>
+          <circle cx="9" cy="18" r="2"/>
+          <circle cx="17" cy="18" r="2"/>
+        </svg>
+        Mi embarazo
+      </button>
+      <button class="nav-boton" data-seccion="controles">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="5" y="4" width="14" height="18" rx="2"/>
+          <path d="M9 2h6v4H9z"/>
+          <path d="M9 13l2 2 4-4"/>
+        </svg>
+        Mis controles
+      </button>
+      <button class="nav-boton alarma" data-seccion="alarma">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
+          <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
+        </svg>
+        Alarma
+      </button>
+    </nav>
+
+  </div>
+
+  <script>
+    // =========================================================
+    // 6. LÓGICA DE NAVEGACIÓN
+    // =========================================================
+
+    // Textos del encabezado para cada sección
+    const TEXTOS = {
+      diario:    { titulo: "Mi diario",     subtitulo: "Cómo te sentís hoy" },
+      embarazo:  { titulo: "Mi embarazo",   subtitulo: "Semana a semana, con vos" },
+      controles: { titulo: "Mis controles", subtitulo: "Turnos, estudios y vacunas" },
+      alarma:    { titulo: "Alarma",        subtitulo: "Cuándo consultar de urgencia" }
+    };
+
+    const botones    = document.querySelectorAll(".nav-boton");
+    const secciones  = document.querySelectorAll(".seccion");
+    const encabezado = document.getElementById("encabezado");
+    const titulo     = document.getElementById("titulo");
+    const subtitulo  = document.getElementById("subtitulo");
+
+    // Muestra una sección y oculta las demás
+    function mostrarSeccion(id) {
+      secciones.forEach(s => s.classList.toggle("activa", s.id === id));
+
+      botones.forEach(b => {
+        const esActivo = b.dataset.seccion === id;
+        b.classList.toggle("activo", esActivo);
+        if (esActivo) b.setAttribute("aria-current", "page");
+        else b.removeAttribute("aria-current");
+      });
+
+      encabezado.classList.toggle("alarma", id === "alarma");   // encabezado rojo en Alarma
+      titulo.textContent    = TEXTOS[id].titulo;
+      subtitulo.textContent = TEXTOS[id].subtitulo;
+      window.scrollTo(0, 0);
+    }
+
+    // Cada botón de la barra llama a mostrarSeccion con su data-seccion
+    botones.forEach(b => {
+      b.addEventListener("click", () => mostrarSeccion(b.dataset.seccion));
+    });
+
+
+    // =========================================================
+    // 7. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
+    // =========================================================
+    if ("serviceWorker" in navigator && window.isSecureContext && location.protocol !== "file:") {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("sw.js").catch(error => {
+          console.warn("No se pudo activar el modo sin conexión:", error);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
