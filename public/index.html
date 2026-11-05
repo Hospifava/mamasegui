@@ -1023,6 +1023,160 @@
     .res-ok:empty { display: none; }
     .res-pie { margin-top: 16px; text-align: center; font-size: 14px; color: var(--texto-suave); }
 
+    /* =========================================================
+       4f. MIS CONTROLES
+       ========================================================= */
+    /* Aviso del próximo turno arriba de "Mi diario" */
+    .aviso-turno {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border: none;
+      border-radius: 16px;
+      background: var(--lila);
+      color: var(--blanco);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(125, 91, 166, 0.3);
+    }
+
+    .aviso-turno:active { transform: scale(0.98); }
+    .aviso-turno:focus-visible { outline: 3px solid var(--rosa); outline-offset: 2px; }
+    .aviso-turno-icono { flex-shrink: 0; width: 44px; height: 44px; border-radius: 12px; background: rgba(255, 255, 255, 0.2); display: flex; align-items: center; justify-content: center; }
+    .aviso-turno-icono svg { width: 24px; height: 24px; }
+    .aviso-turno-texto { flex: 1; min-width: 0; }
+    .aviso-turno-texto b { display: block; font-size: 17px; line-height: 1.3; }
+    .aviso-turno-texto small { display: block; font-size: 14px; opacity: 0.92; overflow-wrap: anywhere; }
+
+    /* Próximo turno destacado */
+    .proximo-turno {
+      margin-top: 12px;
+      padding: 16px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--lila), var(--rosa));
+      color: var(--blanco);
+    }
+
+    .proximo-turno small { display: block; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.9; }
+    .proximo-turno b { display: block; margin-top: 4px; font-size: 22px; line-height: 1.25; }
+    .proximo-turno p { margin-top: 4px; font-size: 16px; overflow-wrap: anywhere; }
+    .proximo-turno .falta { display: inline-block; margin-top: 8px; padding: 3px 10px; border-radius: 999px; background: rgba(255, 255, 255, 0.22); font-size: 14px; font-weight: 700; }
+
+    .turnos { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+
+    .turno {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 6px 10px 12px;
+      border-radius: 14px;
+      border: 2px solid var(--borde);
+    }
+
+    .turno-fecha {
+      flex-shrink: 0;
+      width: 52px;
+      padding: 4px 0;
+      border-radius: 12px;
+      background: var(--lila-claro);
+      color: var(--lila);
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .turno-fecha b { display: block; font-size: 20px; }
+    .turno-fecha small { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+    .turno-texto { flex: 1; min-width: 0; }
+    .turno-texto b { display: block; font-size: 16px; }
+    .turno-texto span { display: block; font-size: 14px; color: var(--texto-suave); overflow-wrap: anywhere; }
+
+    .turnos-pasados { margin-top: 14px; }
+    .turnos-pasados summary { min-height: 44px; display: flex; align-items: center; font-weight: 600; color: var(--texto-suave); cursor: pointer; }
+    .turnos-pasados .turno { opacity: 0.7; }
+
+    /* Checklist */
+    .trimestre-actual {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: var(--lila-claro);
+      font-size: 16px;
+    }
+
+    .grupo-trimestre {
+      margin-top: 14px;
+      border: 2px solid var(--borde);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .grupo-trimestre.actual { border-color: var(--lila); box-shadow: 0 0 0 3px var(--lila-claro); }
+
+    .grupo-trimestre summary {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 56px;
+      padding: 10px 14px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .grupo-trimestre summary::-webkit-details-marker { display: none; }
+    .grupo-trimestre summary::after { content: "▾"; margin-left: auto; color: var(--texto-suave); transition: transform 0.2s; }
+    .grupo-trimestre[open] summary::after { transform: rotate(180deg); }
+    .grupo-trimestre.actual summary { background: var(--lila-claro); }
+    .grupo-trimestre summary b { font-size: 18px; }
+    .grupo-trimestre summary span { font-size: 14px; color: var(--texto-suave); }
+
+    .marca-actual { padding: 2px 8px; border-radius: 999px; background: var(--lila); color: var(--blanco) !important; font-size: 12px !important; font-weight: 700; }
+
+    .items { list-style: none; padding: 0 14px 6px; }
+
+    .item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-top: 1px solid var(--borde);
+    }
+
+    .item:first-child { border-top: none; }
+    .item > input[type="checkbox"] { flex-shrink: 0; width: 26px; height: 26px; margin-top: 2px; accent-color: var(--rosa); cursor: pointer; }
+    .item-cuerpo { flex: 1; min-width: 0; }
+    .item-nombre { display: block; font-size: 17px; font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; cursor: pointer; }
+    .item.hecho .item-nombre { color: var(--texto-suave); text-decoration: line-through; }
+    .item-etiquetas { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .item-etiquetas span { padding: 1px 8px; border-radius: 999px; font-size: 12px; font-weight: 700; background: var(--fondo); color: var(--texto-suave); }
+    .item-etiquetas .tipo-vacuna  { background: #e8f6ef; color: #23784f; }
+    .item-etiquetas .tipo-estudio { background: var(--rosa-claro); color: var(--rosa-oscuro); }
+    .item-etiquetas .tipo-control { background: var(--lila-claro); color: var(--lila); }
+    .item-etiquetas .tipo-propio  { background: #fff6e0; color: #7a5310; }
+    .item-para-que { margin-top: 4px; font-size: 15px; color: var(--texto-suave); line-height: 1.4; }
+    .item-para-que b { color: var(--texto); font-weight: 600; }
+
+    .item-fecha { display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 14px; color: var(--texto-suave); }
+
+    .item-fecha input {
+      min-height: 40px;
+      padding: 4px 8px;
+      border: 2px solid var(--borde);
+      border-radius: 10px;
+      font: inherit;
+      font-size: 15px;
+      color: var(--texto);
+    }
+
+    .agregar-item { margin-top: 18px; padding-top: 16px; border-top: 2px dashed var(--borde); }
+    .agregar-item h4 { font-size: 17px; }
+    .campo > span small { font-weight: 400; color: var(--texto-suave); }
+    .opciones-trimestre { display: flex; gap: 8px; }
+    .opciones-trimestre .chip { flex: 1; }
+    .chip[role="radio"][aria-checked="true"] { border-color: var(--rosa); background: var(--rosa-claro); color: var(--rosa-oscuro); }
+
     [hidden] { display: none !important; }
 
     /* =========================================================
@@ -1140,6 +1294,17 @@
 
       <!-- Sección 1: Mi diario (la principal, se abre al iniciar) -->
       <section id="diario" class="seccion activa">
+
+        <!-- Aviso del próximo turno (sale de "Mis controles"; al tocarlo lleva ahí) -->
+        <button type="button" class="aviso-turno" id="aviso-turno" hidden>
+          <span class="aviso-turno-icono">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 17.5h.01M12 17.5h.01"/></svg>
+          </span>
+          <span class="aviso-turno-texto">
+            <b id="aviso-turno-titulo"></b>
+            <small id="aviso-turno-detalle"></small>
+          </span>
+        </button>
 
         <!-- Botón principal: abre el formulario de registro -->
         <button type="button" class="boton boton-grande" id="btn-agregar-registro">
@@ -1262,17 +1427,63 @@
 
       <!-- Sección 3: Mis controles -->
       <section id="controles" class="seccion">
-        <div class="tarjeta">
-          <div class="icono-grande">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <rect x="5" y="4" width="14" height="18" rx="2"/>
-              <path d="M9 2h6v4H9z"/>
-              <path d="M9 13l2 2 4-4"/>
-            </svg>
+
+        <!-- ============ MIS TURNOS ============ -->
+        <div class="panel">
+          <div class="titulo-con-dato">
+            <h3>Mis turnos</h3>
+            <span id="turnos-cantidad"></span>
           </div>
-          <span class="etiqueta">Próximamente</span>
-          <h2>Mis controles</h2>
-          <p>Vas a poder registrar tus turnos, ecografías, análisis y vacunas, y ver cuáles te tocan.</p>
+
+          <!-- Próximo turno, bien destacado (lo completa el JavaScript) -->
+          <div class="proximo-turno" id="proximo-turno" hidden></div>
+          <p class="vacio" id="turnos-vacio">No tenés turnos cargados. Agregá el próximo para tenerlo siempre a mano.</p>
+
+          <button type="button" class="boton-secundario" id="btn-agregar-turno">+ Agregar turno</button>
+
+          <ul class="turnos" id="lista-turnos"></ul>
+
+          <details class="turnos-pasados" id="turnos-pasados" hidden>
+            <summary id="turnos-pasados-titulo">Turnos anteriores</summary>
+            <ul class="turnos" id="lista-turnos-pasados"></ul>
+          </details>
+        </div>
+
+        <!-- ============ MI CHECKLIST DEL EMBARAZO ============ -->
+        <div class="panel">
+          <div class="titulo-con-dato">
+            <h3>Mi checklist del embarazo</h3>
+            <span id="checklist-progreso"></span>
+          </div>
+          <p class="ayuda">Controles, estudios y vacunas recomendados. Tildalos cuando te los hagas y anotá la fecha.</p>
+          <p class="trimestre-actual" id="trimestre-actual" hidden></p>
+          <span class="pendiente-validacion">Contenido pendiente de validación por Obstetricia</span>
+
+          <!-- Grupos por trimestre (los arma el JavaScript) -->
+          <div id="checklist-grupos"></div>
+
+          <!-- Ítems propios -->
+          <form class="agregar-item" id="form-item" novalidate>
+            <h4>Agregar algo que te indicó tu médico</h4>
+            <label class="campo">
+              <span>¿Qué es?</span>
+              <input id="item-nombre" type="text" maxlength="80" autocomplete="off" placeholder="Ej: Ecocardiograma fetal">
+            </label>
+            <label class="campo">
+              <span>¿Para qué sirve? <small>(opcional)</small></span>
+              <input id="item-para-que" type="text" maxlength="120" autocomplete="off" placeholder="Ej: Para ver el corazón del bebé">
+            </label>
+            <fieldset class="grupo">
+              <legend>¿En qué trimestre?</legend>
+              <div class="opciones-trimestre" id="item-trimestre" role="radiogroup" aria-label="Trimestre">
+                <button type="button" class="chip" role="radio" aria-checked="false" data-valor="1">1.º</button>
+                <button type="button" class="chip" role="radio" aria-checked="false" data-valor="2">2.º</button>
+                <button type="button" class="chip" role="radio" aria-checked="false" data-valor="3">3.º</button>
+              </div>
+            </fieldset>
+            <p class="error" id="item-error" role="alert"></p>
+            <button type="submit" class="boton">Agregar al checklist</button>
+          </form>
         </div>
       </section>
 
@@ -1353,6 +1564,45 @@
         Alarma
       </button>
     </nav>
+
+    <!-- ===================== FORMULARIO DE TURNO (Mis controles) ===================== -->
+    <div class="hoja-fondo" id="turno-fondo" hidden>
+      <form class="hoja" id="form-turno" novalidate role="dialog" aria-modal="true" aria-labelledby="turno-titulo">
+        <div class="hoja-asa"></div>
+        <h2 id="turno-titulo">Nuevo turno</h2>
+
+        <div class="fila-campos">
+          <label class="campo">
+            <span>Fecha</span>
+            <input id="turno-fecha" type="date" required>
+          </label>
+          <label class="campo">
+            <span>Hora</span>
+            <input id="turno-hora" type="time" required>
+          </label>
+        </div>
+
+        <fieldset class="grupo">
+          <legend>¿Qué tipo de turno?</legend>
+          <div class="chips" id="turno-tipo" role="radiogroup" aria-label="Tipo de turno">
+            <button type="button" class="chip" role="radio" aria-checked="true"  data-valor="control">Control obstétrico</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-valor="ecografia">Ecografía</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-valor="laboratorio">Laboratorio</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-valor="vacuna">Vacuna</button>
+            <button type="button" class="chip" role="radio" aria-checked="false" data-valor="otro">Otro</button>
+          </div>
+        </fieldset>
+
+        <label class="campo">
+          <span>Lugar <small>(opcional)</small></span>
+          <input id="turno-lugar" type="text" maxlength="80" autocomplete="off" placeholder="Ej: Hospital Favaloro, consultorio 3">
+        </label>
+
+        <p class="error" id="turno-error" role="alert"></p>
+        <button type="submit" class="boton">Guardar turno</button>
+        <button type="button" class="boton-texto" id="turno-cancelar">Cancelar</button>
+      </form>
+    </div>
 
     <!-- ===================== RESUMEN PARA MI CONTROL ===================== -->
     <!-- Pantalla completa, letra grande, pensada para mostrarle al médico desde el celular.
@@ -1561,6 +1811,7 @@
       subtitulo.textContent = TEXTOS[id].subtitulo;
       window.scrollTo(0, 0);
       if (id === "embarazo") alMostrarEmbarazo();   // recalcula y muestra el mes actual
+      if (id === "controles") alMostrarControles(); // turnos y trimestre actual al día
     }
 
     // Cada botón de la barra llama a mostrarSeccion con su data-seccion
@@ -2615,7 +2866,395 @@
 
 
     // =========================================================
-    // 11. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
+    // 11. MIS CONTROLES
+    // =========================================================
+
+    // ---------- 11.1 Mis turnos ----------
+    // turnos: [{ id, fecha: "2026-11-12", hora: "09:00", tipo: "control", lugar: "" }]
+    const CLAVE_TURNOS = "mamasegui.turnos";
+    const TIPOS_TURNO = { control: "Control obstétrico", ecografia: "Ecografía", laboratorio: "Laboratorio", vacuna: "Vacuna", otro: "Otro" };
+
+    const fechaHoraTurno = t => { const [a, m, d] = t.fecha.split("-").map(Number); const [h, mi] = t.hora.split(":").map(Number); return new Date(a, m - 1, d, h, mi); };
+    const textoHora = f => f.getMinutes() ? `${f.getHours()}:${String(f.getMinutes()).padStart(2, "0")} hs` : `${f.getHours()} hs`;
+    const inicioDia = f => new Date(f.getFullYear(), f.getMonth(), f.getDate());
+    const diasHasta = f => Math.round((inicioDia(f) - inicioDia(new Date())) / DIA_MS);
+
+    // "martes 12" (y el mes si no es el mes actual)
+    function textoDia(f) {
+      const hoy = new Date();
+      const opciones = { weekday: "long", day: "numeric" };
+      if (f.getMonth() !== hoy.getMonth() || f.getFullYear() !== hoy.getFullYear()) opciones.month = "long";
+      return f.toLocaleDateString("es-AR", opciones).replace(",", "");
+    }
+
+    // "hoy" / "mañana" / "el martes 12"
+    const cuandoTurno = f => { const d = diasHasta(f); return d === 0 ? "hoy" : d === 1 ? "mañana" : `el ${textoDia(f)}`; };
+
+    function turnosOrdenados() {
+      const ahora = new Date();
+      const todos = leerLista(CLAVE_TURNOS).map(t => ({ ...t, cuando: fechaHoraTurno(t) })).sort((a, b) => a.cuando - b.cuando);
+      return { proximos: todos.filter(t => t.cuando >= ahora), pasados: todos.filter(t => t.cuando < ahora).reverse() };
+    }
+
+    // Aviso arriba de "Mi diario": "Tu próximo control es el martes 12 a las 9 hs"
+    function renderAvisoTurno() {
+      const aviso = document.getElementById("aviso-turno");
+      const t = turnosOrdenados().proximos[0];
+      aviso.hidden = !t;
+      if (!t) return;
+      document.getElementById("aviso-turno-titulo").textContent =
+        `Tu próximo ${t.tipo === "control" ? "control" : "turno"} es ${cuandoTurno(t.cuando)} a las ${textoHora(t.cuando)}`;
+      document.getElementById("aviso-turno-detalle").textContent = TIPOS_TURNO[t.tipo] + (t.lugar ? ` · ${t.lugar}` : "");
+    }
+
+    document.getElementById("aviso-turno").addEventListener("click", () => mostrarSeccion("controles"));
+
+    function crearItemTurno(t) {
+      const li = el("li", "turno");
+      const caja = el("div", "turno-fecha");
+      caja.append(el("b", null, String(t.cuando.getDate())),
+                  el("small", null, t.cuando.toLocaleDateString("es-AR", { month: "short" }).replace(".", "")));
+      const texto = el("div", "turno-texto");
+      texto.append(el("b", null, TIPOS_TURNO[t.tipo]),
+                   el("span", null, `${t.cuando.toLocaleDateString("es-AR", { weekday: "long" })} · ${textoHora(t.cuando)}` + (t.lugar ? ` · ${t.lugar}` : "")));
+      const borrar = el("button", "boton-borrar");
+      borrar.type = "button";
+      borrar.innerHTML = ICONO_BORRAR;
+      borrar.setAttribute("aria-label", `Borrar el turno de ${TIPOS_TURNO[t.tipo]} del ${textoDia(t.cuando)}`);
+      borrar.addEventListener("click", () => borrarTurno(t.id));
+      li.append(caja, texto, borrar);
+      return li;
+    }
+
+    function renderTurnos() {
+      const { proximos, pasados } = turnosOrdenados();
+      const tarjeta = document.getElementById("proximo-turno");
+      document.getElementById("turnos-vacio").hidden = proximos.length > 0;
+      document.getElementById("turnos-cantidad").textContent = proximos.length ? plural(proximos.length, "próximo", "próximos") : "";
+
+      // Próximo turno destacado
+      tarjeta.hidden = !proximos.length;
+      tarjeta.innerHTML = "";
+      if (proximos.length) {
+        const t = proximos[0], d = diasHasta(t.cuando);
+        const dia = textoDia(t.cuando);
+        tarjeta.append(el("small", null, "Tu próximo turno"),
+                       el("b", null, `${dia.charAt(0).toUpperCase() + dia.slice(1)} · ${textoHora(t.cuando)}`),
+                       el("p", null, TIPOS_TURNO[t.tipo] + (t.lugar ? ` · ${t.lugar}` : "")),
+                       el("span", "falta", d === 0 ? "¡Es hoy!" : d === 1 ? "Es mañana" : `Faltan ${d} días`));
+      }
+
+      // Lista: los que siguen (el primero ya está destacado arriba, pero también se puede borrar desde la lista)
+      const lista = document.getElementById("lista-turnos");
+      lista.innerHTML = "";
+      proximos.forEach(t => lista.append(crearItemTurno(t)));
+
+      const cajaPasados = document.getElementById("turnos-pasados");
+      cajaPasados.hidden = !pasados.length;
+      document.getElementById("turnos-pasados-titulo").textContent = `Turnos anteriores (${pasados.length})`;
+      const listaPasados = document.getElementById("lista-turnos-pasados");
+      listaPasados.innerHTML = "";
+      pasados.forEach(t => listaPasados.append(crearItemTurno(t)));
+
+      renderAvisoTurno();
+    }
+
+    function borrarTurno(id) {
+      if (!confirm("¿Borrar este turno?")) return;
+      guardarLista(CLAVE_TURNOS, leerLista(CLAVE_TURNOS).filter(t => t.id !== id));
+      renderTurnos();
+    }
+
+    // Formulario de turno
+    const fondoTurno  = document.getElementById("turno-fondo");
+    const formTurno   = document.getElementById("form-turno");
+    const errorTurno  = document.getElementById("turno-error");
+    const chipsTipo   = document.querySelectorAll("#turno-tipo .chip");
+
+    chipsTipo.forEach(c => c.addEventListener("click", () => {
+      chipsTipo.forEach(o => o.setAttribute("aria-checked", String(o === c)));
+    }));
+
+    function abrirTurno() {
+      formTurno.reset();
+      chipsTipo.forEach(c => c.setAttribute("aria-checked", String(c.dataset.valor === "control")));
+      document.getElementById("turno-fecha").min = hoyTexto();
+      errorTurno.textContent = "";
+      fondoTurno.hidden = false;
+      document.body.style.overflow = "hidden";
+    }
+
+    function cerrarTurno() {
+      fondoTurno.hidden = true;
+      document.body.style.overflow = "";
+      document.getElementById("btn-agregar-turno").focus();
+    }
+
+    document.getElementById("btn-agregar-turno").addEventListener("click", abrirTurno);
+    document.getElementById("turno-cancelar").addEventListener("click", cerrarTurno);
+    fondoTurno.addEventListener("click", e => { if (e.target === fondoTurno) cerrarTurno(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && !fondoTurno.hidden) cerrarTurno(); });
+    formTurno.addEventListener("input", () => { errorTurno.textContent = ""; });
+
+    formTurno.addEventListener("submit", evento => {
+      evento.preventDefault();
+      const fecha = document.getElementById("turno-fecha").value;
+      const hora = document.getElementById("turno-hora").value;
+      if (!fecha || !hora) { errorTurno.textContent = "Completá la fecha y la hora del turno."; return; }
+      const turno = {
+        id: nuevoId(), fecha, hora,
+        tipo: ([...chipsTipo].find(c => c.getAttribute("aria-checked") === "true") || chipsTipo[0]).dataset.valor,
+        lugar: document.getElementById("turno-lugar").value.trim()
+      };
+      if (fechaHoraTurno(turno) < new Date()) { errorTurno.textContent = "Ese día y horario ya pasaron. Revisá la fecha."; return; }
+      const turnos = leerLista(CLAVE_TURNOS);
+      turnos.push(turno);
+      if (!guardarLista(CLAVE_TURNOS, turnos)) return;
+      cerrarTurno();
+      renderTurnos();
+    });
+
+    // ---------- 11.2 Mi checklist del embarazo ----------
+    // ⚠ PENDIENTE DE VALIDACIÓN POR OBSTETRICIA: contenido, momentos y textos.
+    // Fuentes de referencia:
+    //   [MSAL] Ministerio de Salud de la Nación (Argentina): "Recomendaciones para la práctica del control
+    //          preconcepcional, prenatal y puerperal" (Dirección Nacional de Maternidad e Infancia, 2013).
+    //   [CNV]  Calendario Nacional de Vacunación de Argentina, vacunas para personas gestantes.
+    //   [LEY]  Ley 25.543: el test de VIH debe ofrecerse a toda embarazada (con su consentimiento).
+    // Trimestres como en "Mi embarazo": 1.º hasta la semana 13, 2.º de la 14 a la 27, 3.º desde la 28.
+    const CHECKLIST = [
+      // ----- 1.er trimestre -----
+      { id: "t1-primer-control", trimestre: 1, tipo: "control", nombre: "Primer control del embarazo", cuando: "Lo antes posible, idealmente antes de la semana 13",
+        paraQue: "Confirmar el embarazo, calcular la fecha de parto y organizar tus controles." },                          // [MSAL]
+      { id: "t1-grupo-rh", trimestre: 1, tipo: "estudio", nombre: "Grupo sanguíneo y factor Rh", cuando: "En el primer control",
+        paraQue: "Saber si sos Rh negativo, para prevenir problemas en la sangre del bebé." },                               // [MSAL]
+      { id: "t1-hemograma", trimestre: 1, tipo: "estudio", nombre: "Hemograma", cuando: "En el primer control",
+        paraQue: "Ver si tenés anemia." },                                                                                    // [MSAL]
+      { id: "t1-glucemia", trimestre: 1, tipo: "estudio", nombre: "Glucemia en ayunas", cuando: "En el primer control",
+        paraQue: "Ver si tenés el azúcar alto en sangre." },                                                                  // [MSAL]
+      { id: "t1-orina", trimestre: 1, tipo: "estudio", nombre: "Orina completa y urocultivo", cuando: "En el primer control",
+        paraQue: "Encontrar infecciones urinarias, aunque no tengas molestias." },                                           // [MSAL]
+      { id: "t1-vdrl", trimestre: 1, tipo: "estudio", nombre: "VDRL (sífilis)", cuando: "En el primer control",
+        paraQue: "Detectar sífilis: se cura con tratamiento y así no pasa al bebé." },                                       // [MSAL]
+      { id: "t1-vih", trimestre: 1, tipo: "estudio", nombre: "Test de VIH", cuando: "En el primer control (te lo tienen que ofrecer)",
+        paraQue: "Si da positivo, con tratamiento casi siempre se evita que pase al bebé." },                                 // [MSAL] [LEY]
+      { id: "t1-hepatitis-b", trimestre: 1, tipo: "estudio", nombre: "Hepatitis B", cuando: "En el primer control",
+        paraQue: "Saber si tenés hepatitis B, para proteger al bebé cuando nace." },                                          // [MSAL]
+      { id: "t1-chagas", trimestre: 1, tipo: "estudio", nombre: "Chagas", cuando: "En el primer control",
+        paraQue: "Detectar Chagas, que puede pasar al bebé y tiene tratamiento." },                                          // [MSAL]
+      { id: "t1-toxo", trimestre: 1, tipo: "estudio", nombre: "Toxoplasmosis", cuando: "En el primer control",
+        paraQue: "Saber si ya la tuviste o si tenés que cuidarte para no contagiarte." },                                    // [MSAL]
+      { id: "t1-ecografia", trimestre: 1, tipo: "estudio", nombre: "Ecografía del primer trimestre", cuando: "Entre las semanas 11 y 14 (o cuando te la indiquen)",
+        paraQue: "Confirmar de cuántas semanas estás y ver cómo viene el bebé." },                                           // [MSAL]
+      { id: "t1-pap", trimestre: 1, tipo: "estudio", nombre: "PAP (si no lo tenés al día)", cuando: "En los primeros controles",
+        paraQue: "Prevenir el cáncer de cuello de útero." },                                                                  // [MSAL]
+      { id: "t1-odontologo", trimestre: 1, tipo: "control", nombre: "Control con el odontólogo", cuando: "En cualquier momento, mejor al principio",
+        paraQue: "En el embarazo las encías se inflaman más; cuidar la boca también te cuida a vos y al bebé." },              // [MSAL]
+      { id: "t1-antigripal", trimestre: 1, tipo: "vacuna", nombre: "Vacuna antigripal", cuando: "En cualquier trimestre, durante la campaña de invierno",
+        paraQue: "Te protege de la gripe y también protege al bebé en sus primeros meses." },                                // [CNV]
+      { id: "t1-hepatitis-b-vacuna", trimestre: 1, tipo: "vacuna", nombre: "Vacuna de hepatitis B (si no tenés las 3 dosis)", cuando: "Si tu esquema está incompleto",
+        paraQue: "Te protege de la hepatitis B." },                                                                           // [CNV]
+
+      // ----- 2.º trimestre -----
+      { id: "t2-controles", trimestre: 2, tipo: "control", nombre: "Controles mensuales", cuando: "Una vez por mes",
+        paraQue: "Controlar tu presión, tu peso y el crecimiento del bebé." },                                                // [MSAL]
+      { id: "t2-eco-morfologica", trimestre: 2, tipo: "estudio", nombre: "Ecografía morfológica", cuando: "Entre las semanas 20 y 24",
+        paraQue: "Revisar con detalle cómo se están formando los órganos del bebé." },                                       // [MSAL]
+      { id: "t2-ptog", trimestre: 2, tipo: "estudio", nombre: "Prueba de tolerancia a la glucosa (PTOG)", cuando: "Entre las semanas 24 y 28",
+        paraQue: "Detectar la diabetes que puede aparecer en el embarazo." },                                                // [MSAL]
+      { id: "t2-repetir", trimestre: 2, tipo: "estudio", nombre: "Repetir VDRL y toxoplasmosis (si te dio negativa)", cuando: "En el segundo trimestre",
+        paraQue: "Ver que no te hayas contagiado durante el embarazo." },                                                    // [MSAL]
+      { id: "t2-coombs", trimestre: 2, tipo: "estudio", nombre: "Coombs indirecta (si sos Rh negativo)", cuando: "Entre las semanas 24 y 28",
+        paraQue: "Ver si tu cuerpo hizo defensas contra la sangre del bebé." },                                              // [MSAL]
+      { id: "t2-dtpa", trimestre: 2, tipo: "vacuna", nombre: "Vacuna triple bacteriana acelular (dTpa)", cuando: "Desde la semana 20, en cada embarazo",
+        paraQue: "Protege al bebé contra la tos convulsa en sus primeros meses." },                                          // [CNV]
+
+      // ----- 3.er trimestre -----
+      { id: "t3-controles", trimestre: 3, tipo: "control", nombre: "Controles más seguidos", cuando: "Cada 2 o 3 semanas, y cada semana desde la 36",
+        paraQue: "Seguir de cerca tu presión y cómo está el bebé hasta el parto." },                                          // [MSAL]
+      { id: "t3-laboratorio", trimestre: 3, tipo: "estudio", nombre: "Análisis del tercer trimestre", cuando: "En el tercer trimestre",
+        paraQue: "Hemograma, VDRL, VIH, hepatitis B y toxoplasmosis: revisar anemia e infecciones antes del parto." },        // [MSAL]
+      { id: "t3-anti-d", trimestre: 3, tipo: "tratamiento", nombre: "Gammaglobulina anti-D (si sos Rh negativo)", cuando: "Alrededor de la semana 28, si te la indican",
+        paraQue: "Evita que tu cuerpo haga defensas contra la sangre del bebé." },                                            // [MSAL]
+      { id: "t3-vsr", trimestre: 3, tipo: "vacuna", nombre: "Vacuna contra el virus sincicial respiratorio (VSR)", cuando: "Entre las semanas 32 y 36, en temporada de otoño e invierno",
+        paraQue: "Protege al bebé de la bronquiolitis en sus primeros meses." },                                             // [CNV]
+      { id: "t3-estreptococo", trimestre: 3, tipo: "estudio", nombre: "Hisopado para estreptococo B", cuando: "Entre las semanas 35 y 37",
+        paraQue: "Si tenés esta bacteria, te dan antibiótico en el parto para proteger al bebé." },                          // [MSAL]
+      { id: "t3-ecografia", trimestre: 3, tipo: "estudio", nombre: "Ecografía del tercer trimestre (si te la indican)", cuando: "Según lo que indique tu médico",
+        paraQue: "Ver el crecimiento y la posición del bebé." },                                                             // [MSAL]
+      { id: "t3-curso", trimestre: 3, tipo: "control", nombre: "Curso de preparación para la maternidad", cuando: "Desde el tercer trimestre (podés empezar antes)",
+        paraQue: "Conocer cómo es el parto, la lactancia y los primeros cuidados del bebé." }                                 // [MSAL]
+    ];
+
+    const TIPOS_ITEM = { control: "Control", estudio: "Estudio", vacuna: "Vacuna", tratamiento: "Tratamiento", propio: "Indicado por tu médico" };
+
+    // { hechos: { "t1-hemograma": "2026-08-10" }, propios: [{ id, nombre, paraQue, trimestre }] }
+    const CLAVE_CHECKLIST = "mamasegui.checklist";
+
+    function leerChecklist() {
+      const d = leerObjeto(CLAVE_CHECKLIST);
+      return { hechos: d.hechos && typeof d.hechos === "object" ? d.hechos : {}, propios: Array.isArray(d.propios) ? d.propios : [] };
+    }
+
+    function guardarChecklist(datos) {
+      try { localStorage.setItem(CLAVE_CHECKLIST, JSON.stringify(datos)); return true; }
+      catch { alert("No se pudo guardar en este celular (puede estar en modo privado)."); return false; }
+    }
+
+    const gruposAbiertos = new Set();   // qué trimestres abrió la usuaria (se mantiene al redibujar)
+    let gruposIniciados = false;
+
+    function trimestreActual() {
+      const e = leerEmbarazo();
+      return e && e.fum ? calcularEmbarazo(e.fum).trimestre : null;
+    }
+
+    function crearItemChecklist(item, datos) {
+      const hecho = item.id in datos.hechos;
+      const li = el("li", "item" + (hecho ? " hecho" : ""));
+      const idCheck = "chk-" + item.id;
+
+      const check = el("input");
+      check.type = "checkbox";
+      check.id = idCheck;
+      check.checked = hecho;
+      check.addEventListener("change", () => {
+        const d = leerChecklist();
+        if (check.checked) d.hechos[item.id] = hoyTexto(); else delete d.hechos[item.id];
+        if (guardarChecklist(d)) renderChecklist();
+      });
+
+      const cuerpo = el("div", "item-cuerpo");
+      const nombre = el("label", "item-nombre", item.nombre);
+      nombre.htmlFor = idCheck;
+      const etiquetas = el("div", "item-etiquetas");
+      etiquetas.append(el("span", "tipo-" + item.tipo, TIPOS_ITEM[item.tipo]));
+      if (item.cuando) etiquetas.append(el("span", null, item.cuando));
+      cuerpo.append(nombre, etiquetas);
+
+      if (item.paraQue) {
+        const p = el("p", "item-para-que");
+        p.append(el("b", null, "¿Para qué sirve? "), document.createTextNode(item.paraQue));
+        cuerpo.append(p);
+      }
+
+      // Fecha en que se hizo (aparece al tildar; se puede corregir)
+      if (hecho) {
+        const fila = el("label", "item-fecha");
+        const input = el("input");
+        input.type = "date";
+        input.max = hoyTexto();
+        input.value = datos.hechos[item.id] || "";
+        input.setAttribute("aria-label", `Fecha en que se hizo: ${item.nombre}`);
+        input.addEventListener("change", () => {
+          const d = leerChecklist();
+          d.hechos[item.id] = input.value && input.value <= hoyTexto() ? input.value : "";
+          guardarChecklist(d);
+        });
+        fila.append(document.createTextNode("Hecho el"), input);
+        cuerpo.append(fila);
+      }
+
+      li.append(check, cuerpo);
+
+      if (item.tipo === "propio") {
+        const borrar = el("button", "boton-borrar");
+        borrar.type = "button";
+        borrar.innerHTML = ICONO_BORRAR;
+        borrar.setAttribute("aria-label", `Borrar del checklist: ${item.nombre}`);
+        borrar.addEventListener("click", () => {
+          if (!confirm(`¿Borrar "${item.nombre}" del checklist?`)) return;
+          const d = leerChecklist();
+          d.propios = d.propios.filter(p => p.id !== item.id);
+          delete d.hechos[item.id];
+          if (guardarChecklist(d)) renderChecklist();
+        });
+        li.append(borrar);
+      }
+      return li;
+    }
+
+    function renderChecklist() {
+      const datos = leerChecklist();
+      const actual = trimestreActual();
+      const todos = CHECKLIST.concat(datos.propios.map(p => ({ ...p, tipo: "propio", cuando: "" })));
+
+      if (!gruposIniciados) { gruposAbiertos.add(actual || 1); gruposIniciados = true; }
+
+      const hechos = todos.filter(i => i.id in datos.hechos).length;
+      document.getElementById("checklist-progreso").textContent = `${hechos} de ${todos.length} hechos`;
+
+      const aviso = document.getElementById("trimestre-actual");
+      aviso.hidden = false;
+      aviso.textContent = actual
+        ? `Estás en el ${actual}.º trimestre: te marcamos lo que corresponde ahora.`
+        : `Cargá la fecha de tu última menstruación en "Mi embarazo" y te marcamos lo que te toca ahora.`;
+
+      const contenedor = document.getElementById("checklist-grupos");
+      contenedor.innerHTML = "";
+      [1, 2, 3].forEach(n => {
+        const items = todos.filter(i => Number(i.trimestre) === n);
+        const grupo = el("details", "grupo-trimestre" + (n === actual ? " actual" : ""));
+        grupo.open = gruposAbiertos.has(n);
+        grupo.addEventListener("toggle", () => { if (grupo.open) gruposAbiertos.add(n); else gruposAbiertos.delete(n); });
+
+        const resumen = el("summary");
+        resumen.append(el("b", null, `${n}.º trimestre`));
+        resumen.append(el("span", null, `${items.filter(i => i.id in datos.hechos).length}/${items.length}`));
+        if (n === actual) resumen.append(el("span", "marca-actual", "Ahora"));
+        grupo.append(resumen);
+
+        const lista = el("ul", "items");
+        items.forEach(i => lista.append(crearItemChecklist(i, datos)));
+        grupo.append(lista);
+        contenedor.append(grupo);
+      });
+
+      // En el formulario, el trimestre sugerido es el actual
+      if (![...document.querySelectorAll("#item-trimestre .chip")].some(c => c.getAttribute("aria-checked") === "true")) {
+        elegirTrimestreItem(String(actual || 1));
+      }
+    }
+
+    // Ítems propios
+    const chipsTrimestre = document.querySelectorAll("#item-trimestre .chip");
+    function elegirTrimestreItem(valor) {
+      chipsTrimestre.forEach(c => c.setAttribute("aria-checked", String(c.dataset.valor === valor)));
+    }
+    chipsTrimestre.forEach(c => c.addEventListener("click", () => elegirTrimestreItem(c.dataset.valor)));
+
+    document.getElementById("form-item").addEventListener("submit", evento => {
+      evento.preventDefault();
+      const nombre = document.getElementById("item-nombre").value.trim();
+      const errorItem = document.getElementById("item-error");
+      if (!nombre) { errorItem.textContent = "Escribí qué te indicó tu médico."; return; }
+      errorItem.textContent = "";
+      const trimestre = Number(([...chipsTrimestre].find(c => c.getAttribute("aria-checked") === "true") || chipsTrimestre[0]).dataset.valor);
+      const d = leerChecklist();
+      d.propios.push({ id: "propio-" + nuevoId(), nombre, paraQue: document.getElementById("item-para-que").value.trim(), trimestre });
+      if (!guardarChecklist(d)) return;
+      document.getElementById("item-nombre").value = "";
+      document.getElementById("item-para-que").value = "";
+      gruposAbiertos.add(trimestre);
+      renderChecklist();
+    });
+    document.getElementById("item-nombre").addEventListener("input", () => { document.getElementById("item-error").textContent = ""; });
+
+    function alMostrarControles() {
+      renderTurnos();
+      renderChecklist();
+    }
+
+    // Al volver a la app (otro día u otra hora), se actualizan el próximo turno y el aviso
+    document.addEventListener("visibilitychange", () => { if (!document.hidden) renderTurnos(); });
+    setInterval(renderAvisoTurno, 60 * 1000);
+
+    renderTurnos();
+    renderChecklist();
+
+
+    // =========================================================
+    // 12. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
     // =========================================================
     if ("serviceWorker" in navigator && window.isSecureContext && location.protocol !== "file:") {
       window.addEventListener("load", () => {
