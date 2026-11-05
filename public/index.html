@@ -232,6 +232,222 @@
 
     .aviso-info svg { width: 24px; height: 24px; flex-shrink: 0; color: var(--ambar); margin-top: 1px; }
 
+    /* =========================================================
+       4b. MI EMBARAZO
+       ========================================================= */
+    .panel {
+      background: var(--blanco);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      padding: 20px;
+    }
+
+    .panel + .panel { margin-top: 16px; }
+    .panel h3 { font-size: 20px; line-height: 1.25; }
+    .ayuda { margin-top: 4px; color: var(--texto-suave); font-size: 15px; }
+
+    .campo { display: block; margin-top: 16px; }
+    .campo > span { display: block; font-weight: 600; margin-bottom: 6px; }
+
+    .campo input {
+      width: 100%;
+      min-height: 56px;
+      padding: 10px 14px;
+      border: 2px solid var(--borde);
+      border-radius: 14px;
+      background: var(--blanco);
+      color: var(--texto);
+      font: inherit;
+      font-size: 18px;
+    }
+
+    .campo input:focus { outline: none; border-color: var(--rosa); box-shadow: 0 0 0 3px var(--rosa-claro); }
+    .pista { display: block; margin-top: 6px; color: var(--texto-suave); font-size: 14px; }
+    .error { min-height: 0; margin-top: 10px; color: var(--alarma); font-weight: 600; font-size: 15px; }
+    .error:empty { display: none; }
+
+    .boton {
+      display: block;
+      width: 100%;
+      min-height: 56px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 16px;
+      background: var(--rosa);
+      color: var(--blanco);
+      font: inherit;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .boton:active { transform: scale(0.98); background: var(--rosa-oscuro); }
+
+    .boton-secundario {
+      display: block;
+      width: 100%;
+      min-height: 50px;
+      margin-top: 12px;
+      border: 2px solid var(--rosa-claro);
+      border-radius: 14px;
+      background: var(--blanco);
+      color: var(--rosa-oscuro);
+      font: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .boton-secundario:active { background: var(--rosa-claro); }
+    .boton:focus-visible, .boton-secundario:focus-visible, .flecha-mes:focus-visible { outline: 3px solid var(--lila); outline-offset: 2px; }
+
+    /* Resumen: semana actual y barra de progreso */
+    .semana-actual { display: flex; align-items: baseline; gap: 8px; margin-top: 2px; }
+    .semana-actual strong { font-size: 44px; line-height: 1.1; color: var(--rosa-oscuro); }
+    .semana-actual span { font-size: 18px; color: var(--texto-suave); font-weight: 600; }
+    .edad-exacta { font-size: 16px; color: var(--texto); }
+
+    .progreso {
+      margin-top: 14px;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--rosa-claro);
+      overflow: hidden;
+    }
+
+    .progreso-relleno {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--rosa), var(--lila));
+      transition: width 0.6s ease;
+    }
+
+    .progreso-texto { display: flex; justify-content: space-between; gap: 10px; margin-top: 6px; font-size: 14px; color: var(--texto-suave); }
+    .progreso-texto strong { color: var(--texto); }
+
+    .datos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 16px; }
+
+    .dato {
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--fondo);
+    }
+
+    .dato small { display: block; font-size: 13px; color: var(--texto-suave); font-weight: 600; }
+    .dato b { display: block; font-size: 18px; line-height: 1.3; }
+    .dato.ancho { grid-column: 1 / -1; background: var(--lila-claro); }
+
+    .nota-suave {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: var(--rosa-claro);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    /* Carrusel de meses: se desliza con el dedo (scroll-snap) o con las flechas */
+    .meses-encabezado { display: flex; align-items: center; gap: 10px; }
+    .meses-encabezado h3 { flex: 1; }
+
+    .controles-mes { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; }
+
+    .flecha-mes {
+      flex-shrink: 0;
+      width: 52px;
+      height: 52px;
+      border: none;
+      border-radius: 50%;
+      background: var(--rosa-claro);
+      color: var(--rosa-oscuro);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .flecha-mes svg { width: 26px; height: 26px; }
+    .flecha-mes:active { transform: scale(0.94); }
+    .flecha-mes:disabled { opacity: 0.35; cursor: default; transform: none; }
+
+    .indicador-mes { flex: 1; text-align: center; min-width: 0; }
+    .indicador-mes b { display: block; font-size: 18px; }
+    .indicador-mes span { font-size: 14px; color: var(--texto-suave); }
+
+    .puntos { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
+    .puntos span { width: 8px; height: 8px; border-radius: 50%; background: var(--borde); transition: background 0.2s, transform 0.2s; }
+    .puntos span.activo { background: var(--rosa); transform: scale(1.3); }
+    .puntos span.actual { box-shadow: 0 0 0 2px var(--lila-claro); }
+
+    .carrusel {
+      display: flex;
+      align-items: flex-start;
+      margin: 12px -20px 0;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+    }
+
+    .carrusel::-webkit-scrollbar { display: none; }
+
+    .mes-tarjeta {
+      flex: 0 0 100%;
+      scroll-snap-align: center;
+      scroll-snap-stop: always;
+      padding: 0 20px;
+    }
+
+    .dibujo-bebe { position: relative; display: block; width: 100%; max-width: 230px; margin: 0 auto; }
+    .dibujo-bebe svg { display: block; width: 100%; height: auto; }
+
+    .estas-aca {
+      position: absolute;
+      top: 4px;
+      right: -6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--lila);
+      color: var(--blanco);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .comparacion {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: var(--fondo);
+    }
+
+    .comparacion svg { flex-shrink: 0; width: 64px; height: 64px; }
+    .comparacion p { font-size: 16px; line-height: 1.35; }
+    .comparacion p b { color: var(--rosa-oscuro); }
+
+    .medidas { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+    .medidas div { padding: 10px 12px; border-radius: 14px; border: 2px solid var(--borde); }
+    .medidas small { display: block; font-size: 13px; color: var(--texto-suave); font-weight: 600; }
+    .medidas b { font-size: 18px; }
+
+    .mes-texto { margin-top: 12px; font-size: 16px; line-height: 1.55; }
+
+    .aviso-chico { margin-top: 14px; font-size: 13px; color: var(--texto-suave); text-align: center; line-height: 1.4; }
+
+    .pendiente-validacion {
+      display: inline-block;
+      margin-top: 6px;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px dashed var(--ambar);
+      color: #7a5310;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
     [hidden] { display: none !important; }
 
     /* =========================================================
@@ -360,17 +576,73 @@
 
       <!-- Sección 2: Mi embarazo -->
       <section id="embarazo" class="seccion">
-        <div class="tarjeta lila">
-          <div class="icono-grande">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M3 5h2.5l2 7h11a6.5 6.5 0 0 0-6.5-6.5H11V12"/>
-              <circle cx="9" cy="18" r="2"/>
-              <circle cx="17" cy="18" r="2"/>
-            </svg>
+
+        <!-- Formulario de la fecha de última menstruación (FUM).
+             Se muestra si todavía no la cargó, o al tocar "Cambiar fecha". -->
+        <form class="panel" id="form-fum" novalidate hidden>
+          <h3 id="fum-titulo">¿Cuándo fue tu última menstruación?</h3>
+          <p class="ayuda">Con esa fecha calculamos de cuántas semanas estás y cuándo nacería tu bebé.</p>
+          <label class="campo">
+            <span>Primer día de tu última menstruación</span>
+            <input id="fum-fecha" type="date" required>
+            <small class="pista">Si en una ecografía te dieron otra fecha, tu médico u obstétrica te va a decir cuál usar.</small>
+          </label>
+          <p class="error" id="fum-error" role="alert"></p>
+          <button type="submit" class="boton">Guardar</button>
+          <button type="button" class="boton-secundario" id="fum-cancelar" hidden>Cancelar</button>
+        </form>
+
+        <!-- Resumen: semana, mes, trimestre y fecha probable de parto -->
+        <div class="panel" id="resumen-embarazo" hidden>
+          <h3>Estás en la semana</h3>
+          <div class="semana-actual"><strong id="emb-semana">–</strong></div>
+          <p class="edad-exacta" id="emb-exacta"></p>
+
+          <div class="progreso" role="progressbar" aria-valuemin="0" aria-valuemax="40" id="emb-progreso">
+            <div class="progreso-relleno" id="emb-relleno"></div>
           </div>
-          <span class="etiqueta">Próximamente</span>
-          <h2>Mi embarazo</h2>
-          <p>Vas a poder seguir tu embarazo semana a semana: cuánto falta para la fecha probable de parto y cómo va creciendo tu bebé.</p>
+          <div class="progreso-texto">
+            <strong id="emb-progreso-texto">Semana 0 de 40</strong>
+            <span id="emb-faltan"></span>
+          </div>
+
+          <div class="datos">
+            <div class="dato"><small>Mes</small><b id="emb-mes">–</b></div>
+            <div class="dato"><small>Trimestre</small><b id="emb-trimestre">–</b></div>
+            <div class="dato ancho"><small>Fecha probable de parto</small><b id="emb-fpp">–</b></div>
+          </div>
+
+          <p class="nota-suave" id="emb-nota" hidden></p>
+
+          <button type="button" class="boton-secundario" id="fum-cambiar">Cambiar fecha de última menstruación</button>
+        </div>
+
+        <!-- Mes a mes: carrusel con los 9 meses (las tarjetas las arma el JavaScript) -->
+        <div class="panel">
+          <div class="meses-encabezado">
+            <h3>Tu bebé mes a mes</h3>
+          </div>
+
+          <div class="controles-mes">
+            <button type="button" class="flecha-mes" id="mes-anterior" aria-label="Mes anterior">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg>
+            </button>
+            <div class="indicador-mes" aria-live="polite">
+              <b id="mes-nombre">Mes 1</b>
+              <span id="mes-semanas">Semanas 1 a 4</span>
+            </div>
+            <button type="button" class="flecha-mes" id="mes-siguiente" aria-label="Mes siguiente">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
+          <div class="puntos" id="mes-puntos" aria-hidden="true"></div>
+
+          <div class="carrusel" id="carrusel-meses" tabindex="0" aria-label="Meses del embarazo. Deslizá para ver otros meses."></div>
+
+          <p class="aviso-chico">
+            Medidas aproximadas. Cada bebé crece a su ritmo.<br>
+            <span class="pendiente-validacion">Textos pendientes de validación por Obstetricia</span>
+          </p>
         </div>
       </section>
 
@@ -504,6 +776,7 @@
       titulo.textContent    = TEXTOS[id].titulo;
       subtitulo.textContent = TEXTOS[id].subtitulo;
       window.scrollTo(0, 0);
+      if (id === "embarazo") alMostrarEmbarazo();   // recalcula y muestra el mes actual
     }
 
     // Cada botón de la barra llama a mostrarSeccion con su data-seccion
@@ -513,7 +786,395 @@
 
 
     // =========================================================
-    // 7. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
+    // 7. MI EMBARAZO
+    // =========================================================
+
+    // ---------- 7.1 Datos de cada mes ----------
+    // ⚠ PENDIENTE DE VALIDACIÓN POR OBSTETRICIA: medidas, pesos y textos son aproximados
+    //   (valores habituales de referencia) y deben ser revisados por el equipo antes de usarse con pacientes.
+    // semanas: semanas de embarazo que abarca cada mes (9 meses = 40 semanas).
+    // Hasta el mes 4 el tamaño se mide de la cabeza a la cola; desde el mes 5, de la cabeza a los pies.
+    const MESES = [
+      { mes: 1, semanas: [1, 4],   tamano: "2 mm",    peso: "menos de 1 g", fruta: "lenteja",   comoQue: "una lenteja",
+        texto: "Tu bebé es apenas un grupito de células que encontró su lugar en tu útero. Ya empiezan a formarse su corazón y su sistema nervioso." },
+      { mes: 2, semanas: [5, 8],   tamano: "1,6 cm",  peso: "1 g",          fruta: "uva",       comoQue: "una uva",
+        texto: "¡Su corazoncito ya late! Se forman los bracitos, las piernas, los ojos y las orejas, y de a poco empieza a parecerse a un bebé." },
+      { mes: 3, semanas: [9, 13],  tamano: "7 cm",    peso: "25 g",         fruta: "limon",     comoQue: "un limón",
+        texto: "Ya tiene todos sus órganos y ahora les toca crecer. Mueve las manos y los pies, aunque todavía no lo podés sentir." },
+      { mes: 4, semanas: [14, 17], tamano: "13 cm",   peso: "150 g",        fruta: "palta",     comoQue: "una palta",
+        texto: "Se forman sus huellitas digitales y empieza a escuchar sonidos. Hasta puede chuparse el dedo." },
+      { mes: 5, semanas: [18, 22], tamano: "27 cm",   peso: "430 g",        fruta: "choclo",    comoQue: "un choclo",
+        texto: "Es probable que empieces a sentir sus primeros movimientos, como burbujitas. Le crecen el pelito y las cejas." },
+      { mes: 6, semanas: [23, 27], tamano: "36 cm",   peso: "900 g",        fruta: "berenjena", comoQue: "una berenjena",
+        texto: "Abre y cierra los ojos y reconoce tu voz. Sus pulmones se van preparando para respirar." },
+      { mes: 7, semanas: [28, 31], tamano: "41 cm",   peso: "1,5 kg",       fruta: "anana",     comoQue: "un ananá",
+        texto: "Suma grasita debajo de la piel y se pone más redondito. Duerme y se despierta, y reacciona a la luz y a los sonidos." },
+      { mes: 8, semanas: [32, 35], tamano: "46 cm",   peso: "2,4 kg",       fruta: "melon",     comoQue: "un melón",
+        texto: "Sigue ganando peso y sus pulmones maduran. Tiene menos lugar, así que vas a sentir sus movimientos de otra manera." },
+      { mes: 9, semanas: [36, 40], tamano: "50 cm",   peso: "3,3 kg",       fruta: "sandia",    comoQue: "una sandía",
+        texto: "Ya está casi listo para nacer. Suele acomodarse cabeza abajo y termina de madurar. ¡Falta muy poquito para conocerse!" }
+    ];
+
+    // ---------- 7.2 Guardado (localStorage) ----------
+    // { fum: "2026-06-10" }  (fecha de última menstruación, en formato año-mes-día)
+    const CLAVE_EMBARAZO = "mamasegui.embarazo";
+
+    function leerEmbarazo() {
+      try { return JSON.parse(localStorage.getItem(CLAVE_EMBARAZO)) || null; }
+      catch { return null; }
+    }
+
+    function guardarEmbarazo(datos) {
+      try { localStorage.setItem(CLAVE_EMBARAZO, JSON.stringify(datos)); return true; }
+      catch { return false; }
+    }
+
+    // ---------- 7.3 Cálculos ----------
+    const DIA_MS = 24 * 60 * 60 * 1000;
+    const DURACION_DIAS = 280;   // 40 semanas desde la FUM (regla de Naegele)
+
+    // "2026-06-10" -> número de días (en UTC, para que el cambio de horario no corra un día)
+    function diaNumero(texto) {
+      const [a, m, d] = texto.split("-").map(Number);
+      return Date.UTC(a, m - 1, d) / DIA_MS;
+    }
+
+    function hoyTexto() {
+      const h = new Date();
+      return `${h.getFullYear()}-${String(h.getMonth() + 1).padStart(2, "0")}-${String(h.getDate()).padStart(2, "0")}`;
+    }
+
+    function textoFechaLarga(numeroDia) {
+      return new Date(numeroDia * DIA_MS).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+    }
+
+    const plural = (n, uno, varios) => `${n} ${n === 1 ? uno : varios}`;
+
+    function calcularEmbarazo(fum) {
+      const dias = diaNumero(hoyTexto()) - diaNumero(fum);
+      const semanasCompletas = Math.floor(dias / 7);
+      const semanaEnCurso = semanasCompletas + 1;                    // "estás en la semana X"
+      const mes = (MESES.find(m => semanaEnCurso <= m.semanas[1]) || MESES[8]).mes;
+      const trimestre = semanasCompletas < 14 ? 1 : semanasCompletas < 28 ? 2 : 3;
+      return {
+        dias, semanasCompletas, diasExtra: dias % 7, semanaEnCurso, mes, trimestre,
+        fpp: diaNumero(fum) + DURACION_DIAS,
+        faltan: DURACION_DIAS - dias
+      };
+    }
+
+    // ---------- 7.4 Dibujos SVG ----------
+    // Bebé en el vientre: un círculo (el útero) y el bebé acurrucado que crece mes a mes.
+    // El bebé se dibuja una sola vez (coordenadas alrededor de 0,0) y se agranda con "scale".
+    const ESCALA_BEBE = [0, 0.36, 0.55, 0.7, 0.84, 0.96, 1.08, 1.2, 1.3];
+
+    function svgBebe(mes) {
+      const piel = "#f6c7b0", borde = "#d9967c";
+      let contenido = "";
+
+      if (mes === 1) {
+        // Mes 1: un grupito de células con un brillito
+        contenido = `
+          <g fill="#f2a5c0" stroke="#d97a9c" stroke-width="1.5">
+            <circle cx="100" cy="100" r="9"/><circle cx="111" cy="94" r="6"/><circle cx="92" cy="91" r="5.5"/>
+            <circle cx="108" cy="108" r="5"/><circle cx="90" cy="106" r="4.5"/>
+          </g>
+          <path d="M128 76l2 6 6 2-6 2-2 6-2-6-6-2 6-2z" fill="#c9b3e6"/>
+          <path d="M70 120l1.4 4 4 1.4-4 1.4-1.4 4-1.4-4-4-1.4 4-1.4z" fill="#c9b3e6"/>`;
+      } else {
+        const s = ESCALA_BEBE[mes - 1];
+        const giro = mes === 9 ? 165 : mes >= 7 ? 20 : 0;   // en el mes 9 se pone cabeza abajo
+        // Cabeza abajo (mes 9): la boquita se dibuja al revés para que, girada, siga sonriendo
+        const boca = mes === 9 ? "M-32 -14q3 -3 7 -1" : "M-32 -15q3 3 7 1";
+        const pelo = mes >= 5 && mes < 9 ?`<path d="M-26 -46q8-10 18-6q6-8 14 0" fill="none" stroke="#b07a5c" stroke-width="3" stroke-linecap="round"/>` : "";
+
+        // Punto de la pancita del bebé (para el cordón), pasado a coordenadas del dibujo
+        const rad = giro * Math.PI / 180, bx = -6, by = 26;
+        const px = 100 + s * (bx * Math.cos(rad) - by * Math.sin(rad));
+        const py = 100 + s * (bx * Math.sin(rad) + by * Math.cos(rad));
+
+        contenido = `
+          <path d="M${px.toFixed(1)} ${py.toFixed(1)} Q${(px + 50).toFixed(1)} ${(py + 30).toFixed(1)} 152 52" fill="none" stroke="#e8a3bb" stroke-width="${(2 + s * 2).toFixed(1)}" stroke-linecap="round"/>
+          <g transform="translate(100 100) rotate(${giro}) scale(${s})" stroke="${borde}" stroke-width="${(2 / s).toFixed(2)}">
+            <!-- cuerpito -->
+            <ellipse cx="8" cy="12" rx="26" ry="33" transform="rotate(-18 8 12)" fill="${piel}"/>
+            <!-- pierna doblada y piecito -->
+            <ellipse cx="20" cy="34" rx="18" ry="11" transform="rotate(-35 20 34)" fill="${piel}"/>
+            <ellipse cx="-2" cy="46" rx="10" ry="6" transform="rotate(10 -2 46)" fill="${piel}"/>
+            <!-- cabeza -->
+            <circle cx="-10" cy="-28" r="25" fill="${piel}"/>
+            <!-- bracito con la manito cerca de la cara -->
+            <ellipse cx="-12" cy="2" rx="6.5" ry="15" transform="rotate(35 -12 2)" fill="${piel}"/>
+            <circle cx="-22" cy="-8" r="6" fill="${piel}"/>
+            <!-- orejita -->
+            <circle cx="2" cy="-26" r="5" fill="${piel}"/>
+            <!-- carita: ojito cerrado, cachete y sonrisa -->
+            <path d="M-27 -32q5 4 10 0" fill="none" stroke="#8a5646" stroke-linecap="round"/>
+            <circle cx="-25" cy="-21" r="4.5" fill="#f19aae" stroke="none" opacity="0.75"/>
+            <path d="${boca}" fill="none" stroke="#8a5646" stroke-linecap="round"/>
+            ${pelo}
+          </g>`;
+      }
+
+      return `
+        <svg viewBox="0 0 200 200" role="img" aria-label="Dibujo del bebé en la panza en el mes ${mes}">
+          <circle cx="100" cy="100" r="92" fill="#fbecf1"/>
+          <circle cx="100" cy="100" r="82" fill="#fdf5f8" stroke="#f1c3d4" stroke-width="3"/>
+          <ellipse cx="152" cy="52" rx="16" ry="9" transform="rotate(45 152 52)" fill="#eeb0c5"/>
+          ${contenido}
+        </svg>`;
+    }
+
+    // Frutas y verduras para comparar el tamaño (viewBox 64×64)
+    function svgFruta(nombre) {
+      let d = "";
+      switch (nombre) {
+        case "lenteja":
+          d = `<ellipse cx="32" cy="34" rx="15" ry="12" fill="#d79a52" stroke="#a96a2e" stroke-width="2"/>
+               <ellipse cx="27" cy="30" rx="5" ry="3" fill="#f2c995"/>`;
+          break;
+        case "uva":
+          d = `<path d="M32 22q1-7 7-10" fill="none" stroke="#7a5a2a" stroke-width="2.5" stroke-linecap="round"/>
+               <path d="M36 16q8-6 14 0q-7 5-14 0z" fill="#6aa84f"/>
+               <circle cx="32" cy="38" r="16" fill="#8a5cb8" stroke="#653d92" stroke-width="2"/>
+               <ellipse cx="26" cy="32" rx="4" ry="5" fill="#b896dc"/>`;
+          break;
+        case "limon":
+          d = `<path d="M8 34q2-3 5-4q6-14 19-14q13 0 19 14q3 1 5 4q-2 3-5 4q-6 14-19 14q-13 0-19-14q-3-1-5-4z" fill="#f4d63c" stroke="#c9a51c" stroke-width="2"/>
+               <path d="M34 16q6-8 14-6q-4 8-14 6z" fill="#5f9e3a"/>
+               <ellipse cx="25" cy="28" rx="6" ry="3" fill="#fbe98a"/>`;
+          break;
+        case "palta":
+          d = `<path d="M32 6c-10 0-12 14-14 22c-4 14 2 30 14 30s18-16 14-30c-2-8-4-22-14-22z" fill="#4e7a2c" stroke="#365a1c" stroke-width="2"/>
+               <path d="M32 11c-7 0-8 12-10 19c-3 12 1 24 10 24s13-12 10-24c-2-7-3-19-10-19z" fill="#d3e48e"/>
+               <circle cx="32" cy="41" r="9" fill="#9a693b"/><ellipse cx="29" cy="38" rx="3" ry="2" fill="#c08c5a"/>`;
+          break;
+        case "choclo": {
+          let granos = "";
+          for (let f = 0; f < 6; f++) for (let c = 0; c < 3; c++) granos += `<circle cx="${27 + c * 5}" cy="${14 + f * 6}" r="2.2" fill="#e2b326"/>`;
+          d = `<rect x="22" y="6" width="20" height="46" rx="10" fill="#f6d14a" stroke="#d1a71f" stroke-width="2"/>${granos}
+               <path d="M32 60c-14-6-17-24-12-38c2 14 6 26 12 38z" fill="#6aae46" stroke="#4b8a2e" stroke-width="1.5"/>
+               <path d="M32 60c14-6 17-24 12-38c-2 14-6 26-12 38z" fill="#7cc055" stroke="#4b8a2e" stroke-width="1.5"/>`;
+          break;
+        }
+        case "berenjena":
+          d = `<path d="M29 18c-12 4-17 22-9 34c8 10 26 8 29-5c3-12-4-24-11-29z" fill="#6b3d8f" stroke="#4e2a6b" stroke-width="2"/>
+               <path d="M24 22q8-10 18-4q-4 7-10 7q-4 0-8-3z" fill="#5f9e3a"/>
+               <path d="M34 15q1-6 5-9" fill="none" stroke="#4b8a2e" stroke-width="3" stroke-linecap="round"/>
+               <ellipse cx="24" cy="38" rx="3" ry="7" fill="#9a6fc0" transform="rotate(15 24 38)"/>`;
+          break;
+        case "anana":
+          d = `<path d="M32 22l-4-14 4 6 2-10 2 10 5-7-3 15z" fill="#4f9a3a" stroke="#3a7a2a" stroke-width="1.5" stroke-linejoin="round"/>
+               <ellipse cx="32" cy="41" rx="14" ry="18" fill="#eab43c" stroke="#b9821c" stroke-width="2"/>
+               <path d="M22 32l20 16M20 42l14 12M26 26l18 14M42 32l-20 16M44 42l-14 12M38 26l-18 14" stroke="#c48d22" stroke-width="1.5"/>`;
+          break;
+        case "melon":
+          d = `<circle cx="32" cy="35" r="22" fill="#e9d896" stroke="#b9a157" stroke-width="2"/>
+               <path d="M32 13v44M20 16q-8 19 0 38M44 16q8 19 0 38" fill="none" stroke="#c9b26a" stroke-width="2"/>
+               <path d="M32 13q0-5 4-7" fill="none" stroke="#7a5a2a" stroke-width="2.5" stroke-linecap="round"/>`;
+          break;
+        case "sandia":
+          d = `<ellipse cx="32" cy="35" rx="27" ry="21" fill="#4c9a40" stroke="#2f6e28" stroke-width="2"/>
+               <path d="M14 22q-4 13 0 26M24 15q-5 20 0 40M36 14q-5 21 0 42M48 17q-4 18 0 36" fill="none" stroke="#2f6e28" stroke-width="3" stroke-linecap="round"/>
+               <ellipse cx="20" cy="27" rx="5" ry="3" fill="#8cc87c" transform="rotate(-30 20 27)"/>`;
+          break;
+      }
+      return `<svg viewBox="0 0 64 64" aria-hidden="true">${d}</svg>`;
+    }
+
+    // ---------- 7.5 Pantalla ----------
+    const formFum        = document.getElementById("form-fum");
+    const inputFum       = document.getElementById("fum-fecha");
+    const errorFum       = document.getElementById("fum-error");
+    const botonCancelar  = document.getElementById("fum-cancelar");
+    const resumenEmb     = document.getElementById("resumen-embarazo");
+    const carrusel       = document.getElementById("carrusel-meses");
+    const puntos         = document.getElementById("mes-puntos");
+    const botonAnterior  = document.getElementById("mes-anterior");
+    const botonSiguiente = document.getElementById("mes-siguiente");
+
+    let mesActual = null;     // mes de embarazo de hoy (null si no cargó la fecha)
+    let mesVisible = 1;       // mes que se está mirando en el carrusel
+
+    // Arma las 9 tarjetas del carrusel (una vez)
+    function armarCarrusel() {
+      carrusel.innerHTML = "";
+      puntos.innerHTML = "";
+      MESES.forEach(m => {
+        const tarjeta = document.createElement("article");
+        tarjeta.className = "mes-tarjeta";
+        tarjeta.dataset.mes = m.mes;
+        tarjeta.setAttribute("aria-label", `Mes ${m.mes}`);
+        tarjeta.innerHTML = `
+          <div class="dibujo-bebe">${svgBebe(m.mes)}<span class="estas-aca" hidden>Estás acá</span></div>
+          <div class="comparacion">
+            ${svgFruta(m.fruta)}
+            <p>Tu bebé tiene más o menos el tamaño de <b>${m.comoQue}</b></p>
+          </div>
+          <div class="medidas">
+            <div><small>Tamaño aprox.</small><b>${m.tamano}</b></div>
+            <div><small>Peso aprox.</small><b>${m.peso}</b></div>
+          </div>
+          <p class="mes-texto">${m.texto}</p>`;
+        carrusel.appendChild(tarjeta);
+        puntos.appendChild(document.createElement("span"));
+      });
+    }
+
+    // Actualiza el título "Mes X", los puntitos y las flechas
+    function actualizarIndicador() {
+      const m = MESES[mesVisible - 1];
+      document.getElementById("mes-nombre").textContent = `Mes ${m.mes}` + (m.mes === mesActual ? " · ¡estás acá!" : "");
+      document.getElementById("mes-semanas").textContent = `Semanas ${m.semanas[0]} a ${m.semanas[1]}`;
+      [...puntos.children].forEach((p, i) => {
+        p.classList.toggle("activo", i + 1 === mesVisible);
+        p.classList.toggle("actual", i + 1 === mesActual);
+      });
+      botonAnterior.disabled = mesVisible === 1;
+      botonSiguiente.disabled = mesVisible === 9;
+    }
+
+    // Lleva el carrusel a un mes (con animación o de golpe)
+    function irAMes(mes, suave = true) {
+      mesVisible = Math.min(9, Math.max(1, mes));
+      carrusel.scrollTo({ left: (mesVisible - 1) * carrusel.clientWidth, behavior: suave ? "smooth" : "auto" });
+      actualizarIndicador();
+    }
+
+    botonAnterior.addEventListener("click", () => irAMes(mesVisible - 1));
+    botonSiguiente.addEventListener("click", () => irAMes(mesVisible + 1));
+
+    // Al deslizar con el dedo, detecta qué mes quedó a la vista
+    let esperaScroll = null;
+    carrusel.addEventListener("scroll", () => {
+      cancelAnimationFrame(esperaScroll);
+      esperaScroll = requestAnimationFrame(() => {
+        if (!carrusel.clientWidth) return;
+        const visible = Math.round(carrusel.scrollLeft / carrusel.clientWidth) + 1;
+        if (visible !== mesVisible) { mesVisible = visible; actualizarIndicador(); }
+      });
+    });
+
+    // Flechas del teclado (computadora)
+    carrusel.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft")  { e.preventDefault(); irAMes(mesVisible - 1); }
+      if (e.key === "ArrowRight") { e.preventDefault(); irAMes(mesVisible + 1); }
+    });
+
+    // Si cambia el ancho de la pantalla (girar el celular), mantiene el mes
+    window.addEventListener("resize", () => irAMes(mesVisible, false));
+
+    // Muestra el formulario (para cargar o cambiar la fecha)
+    function mostrarFormularioFum(cambiando) {
+      const datos = leerEmbarazo();
+      inputFum.value = datos ? datos.fum : "";
+      inputFum.max = hoyTexto();
+      errorFum.textContent = "";
+      document.getElementById("fum-titulo").textContent = cambiando ? "Cambiar la fecha" : "¿Cuándo fue tu última menstruación?";
+      botonCancelar.hidden = !cambiando;
+      formFum.hidden = false;
+      resumenEmb.hidden = true;
+      if (cambiando) inputFum.focus();
+    }
+
+    // Dibuja el resumen con los datos calculados
+    function renderEmbarazo() {
+      const datos = leerEmbarazo();
+      if (!datos || !datos.fum) {
+        mesActual = null;
+        mostrarFormularioFum(false);
+        return;
+      }
+
+      const e = calcularEmbarazo(datos.fum);
+      mesActual = e.mes;
+      formFum.hidden = true;
+      resumenEmb.hidden = false;
+
+      const semanaMostrada = Math.min(e.semanaEnCurso, 42);
+      document.getElementById("emb-semana").textContent = semanaMostrada;
+      document.getElementById("emb-exacta").textContent = e.dias === 0 ? "Hoy empieza la cuenta"
+        : e.semanasCompletas === 0 ? `Llevás ${plural(e.dias, "día", "días")} de embarazo`
+        : `Estás de ${plural(e.semanasCompletas, "semana", "semanas")}` + (e.diasExtra ? ` y ${plural(e.diasExtra, "día", "días")}` : "");
+
+      const porcentaje = Math.min(100, Math.max(0, e.dias / DURACION_DIAS * 100));
+      document.getElementById("emb-relleno").style.width = porcentaje.toFixed(1) + "%";
+      const barra = document.getElementById("emb-progreso");
+      barra.setAttribute("aria-valuenow", Math.min(semanaMostrada, 40));
+      barra.setAttribute("aria-valuetext", `Semana ${semanaMostrada} de 40`);
+      document.getElementById("emb-progreso-texto").textContent = semanaMostrada > 40
+        ? `Semana ${semanaMostrada} (pasaste las 40)` : `Semana ${semanaMostrada} de 40`;
+
+      const semFaltan = Math.floor(e.faltan / 7), diasFaltan = e.faltan % 7;
+      const faltaN = (n, uno, varios) => `${n === 1 ? "Falta" : "Faltan"} ${plural(n, uno, varios)}`;
+      document.getElementById("emb-faltan").textContent = e.faltan <= 0 ? "¡Llegó la fecha!"
+        : semFaltan === 0 ? faltaN(diasFaltan, "día", "días")
+        : faltaN(semFaltan, "semana", "semanas");
+
+      document.getElementById("emb-mes").textContent = `${e.mes}.º mes`;
+      document.getElementById("emb-trimestre").textContent = `${e.trimestre}.º trimestre`;
+      document.getElementById("emb-fpp").textContent = textoFechaLarga(e.fpp);
+
+      // Nota según el momento (⚠ pendiente de validación por Obstetricia)
+      const nota = document.getElementById("emb-nota");
+      if (e.semanasCompletas >= 41) {
+        nota.textContent = "Ya pasaste la fecha probable de parto. Es importante que consultes con tu equipo de salud para controlarte.";
+      } else if (e.faltan <= 0) {
+        nota.textContent = "¡Llegó la fecha probable de parto! Seguí los controles que te indicaron. Ante cualquier duda, consultá.";
+      } else {
+        nota.textContent = "";
+      }
+      nota.hidden = !nota.textContent;
+    }
+
+    // Marca la tarjeta del mes actual con "Estás acá"
+    function marcarMesActual() {
+      carrusel.querySelectorAll(".mes-tarjeta").forEach(t => {
+        t.querySelector(".estas-aca").hidden = Number(t.dataset.mes) !== mesActual;
+      });
+    }
+
+    // Se llama cada vez que se abre la sección: recalcula (puede haber cambiado el día) y va al mes actual
+    function alMostrarEmbarazo() {
+      renderEmbarazo();
+      marcarMesActual();
+      irAMes(mesActual || 1, false);
+    }
+
+    // Guardar la fecha
+    formFum.addEventListener("submit", evento => {
+      evento.preventDefault();
+      const valor = inputFum.value;
+      if (!valor) { errorFum.textContent = "Elegí la fecha del primer día de tu última menstruación."; return; }
+
+      const dias = diaNumero(hoyTexto()) - diaNumero(valor);
+      if (dias < 0)   { errorFum.textContent = "La fecha no puede ser posterior a hoy."; return; }
+      if (dias > 300) { errorFum.textContent = "La fecha es de hace más de 10 meses. Revisá que esté bien."; return; }
+
+      if (!guardarEmbarazo({ fum: valor })) {
+        errorFum.textContent = "No se pudo guardar en este celular (puede estar en modo privado).";
+        return;
+      }
+      alMostrarEmbarazo();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+
+    document.getElementById("fum-cambiar").addEventListener("click", () => mostrarFormularioFum(true));
+    botonCancelar.addEventListener("click", () => alMostrarEmbarazo());
+
+    // Al volver a la app otro día, actualiza la semana
+    document.addEventListener("visibilitychange", () => {
+      if (!document.hidden && document.getElementById("embarazo").classList.contains("activa")) {
+        renderEmbarazo(); marcarMesActual(); actualizarIndicador();
+      }
+    });
+
+    armarCarrusel();
+    actualizarIndicador();
+
+
+    // =========================================================
+    // 8. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
     // =========================================================
     if ("serviceWorker" in navigator && window.isSecureContext && location.protocol !== "file:") {
       window.addEventListener("load", () => {
