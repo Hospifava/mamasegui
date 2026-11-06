@@ -183,38 +183,6 @@
     .tarjeta h2 { font-size: 24px; margin-bottom: 8px; }
     .tarjeta p  { color: var(--texto-suave); font-size: 17px; }
 
-    /* Aviso de emergencia (en la sección Alarma) */
-    .aviso-emergencia {
-      margin-top: 18px;
-      padding: 16px;
-      border-radius: 16px;
-      background: var(--alarma-claro);
-      color: #7a1f1f;
-      font-size: 16px;
-      line-height: 1.45;
-      text-align: left;
-    }
-
-    .telefonos { display: flex; gap: 10px; margin-top: 12px; }
-
-    .telefonos a {
-      flex: 1;
-      min-height: 56px;
-      border-radius: 14px;
-      background: var(--alarma);
-      color: var(--blanco);
-      font-size: 20px;
-      font-weight: 700;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .telefonos a svg { width: 22px; height: 22px; }
-    .telefonos a:active { transform: scale(0.98); background: #b8322f; }
-
     /* Aviso general (orientativo) */
     .aviso-info {
       display: flex;
@@ -1177,6 +1145,109 @@
     .opciones-trimestre .chip { flex: 1; }
     .chip[role="radio"][aria-checked="true"] { border-color: var(--rosa); background: var(--rosa-claro); color: var(--rosa-oscuro); }
 
+    /* =========================================================
+       4g. ALARMA
+       ========================================================= */
+    .alarma-mensaje {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 18px 16px;
+      border-radius: var(--radio);
+      background: var(--alarma);
+      color: var(--blanco);
+      box-shadow: 0 6px 18px rgba(208, 58, 58, 0.3);
+    }
+
+    .alarma-mensaje svg { width: 34px; height: 34px; flex-shrink: 0; }
+    .alarma-mensaje p { font-size: 20px; line-height: 1.35; font-weight: 600; }
+    .alarma-mensaje strong { font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+
+    .llamar { display: flex; flex-direction: column; gap: 10px; margin: 16px 0; }
+
+    .boton-llamar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 72px;
+      padding: 12px 18px;
+      border-radius: 18px;
+      color: var(--blanco);
+      text-decoration: none;
+      box-shadow: var(--sombra);
+    }
+
+    .boton-llamar svg { width: 30px; height: 30px; flex-shrink: 0; }
+    .boton-llamar b { display: block; font-size: 19px; line-height: 1.25; }
+    .boton-llamar small { display: block; font-size: 16px; opacity: 0.95; letter-spacing: 0.5px; }
+    .boton-llamar:active { transform: scale(0.98); }
+    .boton-llamar:focus-visible { outline: 3px solid var(--texto); outline-offset: 2px; }
+    .boton-llamar.guardia { background: var(--alarma); }
+    .boton-llamar.emergencias { background: #a82424; }
+
+    .llamar-911 { align-self: center; display: block; padding: 10px 8px; color: #8a1f1f; font-size: 16px; text-align: center; }
+
+    .falta-completar {
+      padding: 10px 12px;
+      border: 2px dashed var(--ambar);
+      border-radius: 12px;
+      background: #fff8e6;
+      color: #5c4300;
+      font-size: 14px;
+    }
+
+    .como-llegar { margin-bottom: 16px; }
+    .como-llegar-fila { display: flex; gap: 12px; align-items: flex-start; }
+    .como-llegar-icono { flex-shrink: 0; width: 48px; height: 48px; border-radius: 14px; background: var(--alarma-claro); color: var(--alarma); display: flex; align-items: center; justify-content: center; }
+    .como-llegar-icono svg { width: 26px; height: 26px; }
+    .como-llegar b { font-size: 17px; line-height: 1.3; }
+    .como-llegar p { font-size: 16px; color: var(--texto-suave); }
+    .como-llegar .falta-completar { margin-top: 6px; }
+    .boton-mapa { display: flex; align-items: center; justify-content: center; gap: 8px; text-decoration: none; font-size: 17px; }
+    .boton-mapa svg { width: 22px; height: 22px; }
+
+    .signos { list-style: none; margin: 10px 0 12px; }
+    .signo { display: flex; gap: 14px; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--borde); }
+    .signo:first-child { border-top: none; }
+    .signo-icono { flex-shrink: 0; width: 48px; height: 48px; border-radius: 50%; background: var(--alarma-claro); color: var(--alarma); display: flex; align-items: center; justify-content: center; }
+    .signo-icono svg { width: 26px; height: 26px; }
+    .signo b { display: block; font-size: 17px; line-height: 1.3; }
+    .signo p { margin-top: 2px; font-size: 16px; color: var(--texto-suave); line-height: 1.4; }
+
+    /* Aviso en "Mi diario" que lleva a Alarma */
+    .aviso-alarma {
+      margin-top: 10px;
+      padding: 12px 14px;
+      border: 2px solid var(--alarma);
+      border-radius: 14px;
+      background: var(--alarma-claro);
+      color: #7a1f1f;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .boton-ir-alarma {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      min-height: 50px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 12px;
+      background: var(--alarma);
+      color: var(--blanco);
+      font: inherit;
+      font-size: 17px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .boton-ir-alarma svg { width: 20px; height: 20px; }
+    .boton-ir-alarma:active { transform: scale(0.98); }
+
     [hidden] { display: none !important; }
 
     /* =========================================================
@@ -1489,32 +1560,101 @@
 
       <!-- Sección 4: Alarma (destacada en rojo) -->
       <section id="alarma" class="seccion">
-        <div class="tarjeta alarma">
-          <div class="icono-grande">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/>
-              <path d="M13.7 21a2 2 0 0 1-3.4 0"/>
-              <path d="M12 6v4"/><path d="M12 13h.01"/>
-            </svg>
-          </div>
-          <span class="etiqueta">Próximamente</span>
-          <h2>Alarma</h2>
-          <p>Vas a poder revisar las señales de alarma del embarazo y saber cuándo consultar de urgencia.</p>
+        <!-- ⚠ PENDIENTE DE VALIDACIÓN POR OBSTETRICIA: todo el contenido de esta sección.
+             Está escrito directo en el HTML para que funcione sin conexión aunque falle el JavaScript. -->
 
-          <!-- Visible desde ya: los teléfonos de emergencia -->
-          <div class="aviso-emergencia" role="note">
-            <strong>Ante una emergencia no esperes:</strong> llamá ya o acercate a la guardia del hospital.
-            <div class="telefonos">
-              <a href="tel:107">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-                107
-              </a>
-              <a href="tel:911">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
-                911
-              </a>
+        <!-- 1. Mensaje principal -->
+        <div class="alarma-mensaje" role="alert">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg>
+          <p>Si tenés alguno de estos síntomas, <strong>andá a la guardia ahora</strong>. No esperes al próximo turno.</p>
+        </div>
+
+        <!-- 3. Botones para llamar (arriba, para no tener que buscarlos en una urgencia).
+             Los números se completan en HOSPITAL, en la sección 12 del JavaScript. -->
+        <div class="llamar">
+          <a class="boton-llamar guardia" id="llamar-guardia" href="#" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            <span><b>Llamar a la guardia del hospital</b><small id="numero-guardia"></small></span>
+          </a>
+          <p class="falta-completar" id="falta-guardia">Teléfono de la guardia del hospital: <b>pendiente de completar</b></p>
+
+          <a class="boton-llamar emergencias" id="llamar-emergencias" href="tel:107">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+            <span><b>Emergencias</b><small id="numero-emergencias">107</small></span>
+          </a>
+          <a class="llamar-911" href="tel:911">También podés llamar al <b>911</b></a>
+        </div>
+
+        <!-- 4. Dirección del hospital y "Cómo llegar" -->
+        <div class="panel como-llegar">
+          <div class="como-llegar-fila">
+            <span class="como-llegar-icono">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 0 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg>
+            </span>
+            <div>
+              <b id="hospital-nombre">Hospital General de Agudos Dr. René Favaloro</b>
+              <p id="hospital-direccion">Rafael Castillo, La Matanza</p>
+              <p class="falta-completar" id="falta-direccion">Dirección exacta: <b>pendiente de completar</b></p>
             </div>
           </div>
+          <a class="boton-secundario boton-mapa" id="boton-mapa" href="https://www.google.com/maps/search/?api=1&amp;query=Hospital%20General%20de%20Agudos%20Dr.%20Ren%C3%A9%20Favaloro%20Rafael%20Castillo" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8z"/></svg>
+            Cómo llegar
+          </a>
+          <small class="pista">El mapa necesita internet. Llamar funciona siempre.</small>
+        </div>
+
+        <!-- 2. Signos de alarma -->
+        <div class="panel">
+          <h3>Signos de alarma</h3>
+          <p class="ayuda">Si te pasa cualquiera de estas cosas, no esperes: andá a la guardia.</p>
+          <ul class="signos">
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.6 6 11a6 6 0 0 1-12 0c0-4.4 6-11 6-11z"/></svg></span>
+              <div><b>Sangrado</b><p>Cualquier sangrado por la vagina, aunque sea poco.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4s3 3.3 3 5.5a3 3 0 0 1-6 0C4 7.3 7 4 7 4z"/><path d="M16 9s4 4.4 4 7.3a4 4 0 0 1-8 0C12 13.4 16 9 16 9z"/></svg></span>
+              <div><b>Pérdida de líquido</b><p>Si te moja la bombacha un líquido como agua, aunque sea de a poco.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></svg></span>
+              <div><b>Dolor de cabeza fuerte o visión borrosa</b><p>Un dolor de cabeza que no se va, ver borroso o ver lucecitas, o un zumbido en los oídos.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 10h.01M15 10h.01"/><path d="M9.5 15h5"/><path d="M3 12h-1M22 12h-1"/></svg></span>
+              <div><b>Hinchazón de golpe en la cara o las manos</b><p>Si de un momento a otro se te hinchan la cara, los párpados o las manos.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 14.8V4a2 2 0 0 0-4 0v10.8a4 4 0 1 0 4 0z"/><path d="M12 10v6"/></svg></span>
+              <div><b>Fiebre</b><p>Temperatura de 38 °C o más.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="13" rx="7" ry="8"/><path d="M13 9l-2 4h3l-2 4"/></svg></span>
+              <div><b>Dolor fuerte en la panza</b><p>Un dolor fuerte o que no se calma, en la panza o en la boca del estómago.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2"/><path d="M10 2h4"/></svg></span>
+              <div><b>Contracciones antes de tiempo</b><p>Antes de la semana 37, si se te pone dura la panza seguido o tenés dolores que van y vienen.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/><path d="M8 12h8"/></svg></span>
+              <div><b>El bebé se mueve menos</b><p>Si sentís que se mueve menos que de costumbre, o dejás de sentirlo.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A3.5 3.5 0 0 0 12 18a3.5 3.5 0 0 0 3.5-3.5c0-2-3.5-6.5-3.5-6.5s-3.5 4.5-3.5 6.5z"/><path d="M12 2c1 1.5 1 3 0 4.5M8 3c.8 1.2.8 2.3 0 3.5M16 3c.8 1.2.8 2.3 0 3.5"/></svg></span>
+              <div><b>Ardor al hacer pis</b><p>Ardor o dolor al orinar, o ganas de hacer pis a cada rato.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 10q1-1.5 2 0M14 10q1-1.5 2 0"/><path d="M9 16q3-2.5 6 0"/></svg></span>
+              <div><b>Vómitos que no paran</b><p>Vomitar muchas veces al día y no poder tomar ni líquidos.</p></div>
+            </li>
+            <li class="signo">
+              <span class="signo-icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg></span>
+              <div><b>Convulsiones o desmayos</b><p>Si tenés una convulsión o te desmayás. Que alguien llame enseguida a emergencias.</p></div>
+            </li>
+          </ul>
+          <span class="pendiente-validacion">Contenido pendiente de validación por Obstetricia</span>
         </div>
       </section>
 
@@ -1750,6 +1890,14 @@
             <button type="button" class="chip" aria-pressed="false" data-valor="otro">Otro</button>
           </div>
           <input id="reg-otro" class="input-otro" type="text" maxlength="60" autocomplete="off" placeholder="¿Cuál? (opcional)" aria-label="Otro síntoma" hidden>
+          <!-- Aparece si los síntomas (y la presión) pueden ser una señal de alarma -->
+          <div class="aviso-alarma" id="reg-aviso-alarma" role="alert" hidden>
+            <span id="reg-aviso-alarma-texto"></span>
+            <button type="button" class="boton-ir-alarma" id="reg-ir-alarma">
+              Ver signos de alarma
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg>
+            </button>
+          </div>
         </fieldset>
 
         <!-- Cómo me siento -->
@@ -2349,10 +2497,35 @@
       return Number.isFinite(n) ? n : NaN;
     }
 
+    // ⚠ PENDIENTE DE VALIDACIÓN POR OBSTETRICIA: combinaciones que llevan a la sección "Alarma".
+    // Devuelve el texto del aviso, o "" si no corresponde.
+    function motivoAlarma(pas, pad, sintomas) {
+      const alta = presionAlta(pas, pad);
+      const motivos = [];
+      if (sintomas.includes("contracciones")) motivos.push("Marcaste contracciones: si estás antes de la semana 37 o son seguidas, pueden ser una señal de alarma.");
+      if (alta && sintomas.includes("dolor-cabeza")) motivos.push("Dolor de cabeza con presión alta puede ser una señal de alarma.");
+      if (alta && sintomas.includes("hinchazon")) motivos.push("Hinchazón con presión alta puede ser una señal de alarma.");
+      return motivos.join(" ");
+    }
+
+    const avisoAlarmaForm = document.getElementById("reg-aviso-alarma");
+
     function revisarPresion() {
       const pas = leerNumero(inputPas), pad = leerNumero(inputPad);
-      alertaPresion.hidden = !presionAlta(Number.isNaN(pas) ? null : pas, Number.isNaN(pad) ? null : pad);
+      const pasOk = Number.isNaN(pas) ? null : pas, padOk = Number.isNaN(pad) ? null : pad;
+      alertaPresion.hidden = !presionAlta(pasOk, padOk);
+      // Aviso que lleva a "Alarma" según los síntomas marcados
+      const sintomas = [...chipsSintomas].filter(c => c.getAttribute("aria-pressed") === "true").map(c => c.dataset.valor);
+      const motivo = motivoAlarma(pasOk, padOk, sintomas);
+      document.getElementById("reg-aviso-alarma-texto").textContent = motivo;
+      avisoAlarmaForm.hidden = !motivo;
     }
+
+    // "Ver signos de alarma": cierra el formulario (sin guardar) y abre la sección Alarma
+    document.getElementById("reg-ir-alarma").addEventListener("click", () => {
+      cerrarRegistro();
+      mostrarSeccion("alarma");
+    });
 
     formRegistro.addEventListener("input", () => { errorRegistro.textContent = ""; });   // borra el error al corregir
     inputPas.addEventListener("input", revisarPresion);
@@ -2365,6 +2538,7 @@
         inputOtro.hidden = !activo;
         if (activo) inputOtro.focus(); else inputOtro.value = "";
       }
+      revisarPresion();   // por si la combinación de síntomas es una señal de alarma
     }));
 
     // Caritas: tocar elige; tocar la misma de nuevo la desmarca (todo es opcional)
@@ -2380,6 +2554,7 @@
       botonesAnimo.forEach(b => b.setAttribute("aria-checked", "false"));
       inputOtro.hidden = true;
       alertaPresion.hidden = true;
+      avisoAlarmaForm.hidden = true;
       errorRegistro.textContent = "";
       fondoRegistro.hidden = false;
       document.body.style.overflow = "hidden";   // que no se mueva la pantalla de atrás
@@ -2492,6 +2667,18 @@
           const s = el("div", "registro-sintomas");
           r.sintomas.forEach(k => s.append(el("span", null, k === "otro" && r.otro ? r.otro : SINTOMAS[k] || k)));
           li.append(s);
+        }
+
+        // Si ese registro tenía una combinación de alarma, se muestra el aviso con el botón a "Alarma"
+        const motivo = motivoAlarma(r.pas, r.pad, r.sintomas || []);
+        if (motivo) {
+          const aviso = el("div", "aviso-alarma");
+          aviso.append(el("span", null, motivo));
+          const ir = el("button", "boton-ir-alarma", "Ver signos de alarma");
+          ir.type = "button";
+          ir.addEventListener("click", () => mostrarSeccion("alarma"));
+          aviso.append(ir);
+          li.append(aviso);
         }
 
         if (r.nota) li.append(el("p", "registro-nota", r.nota));
@@ -3254,7 +3441,53 @@
 
 
     // =========================================================
-    // 12. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
+    // 12. ALARMA: datos del hospital
+    // =========================================================
+    // ⚠ COMPLETAR antes de usar con pacientes (y validar con Obstetricia):
+    //   - telefonoGuardia: teléfono de la guardia obstétrica del hospital, con código de área, escrito como
+    //     se quiere mostrar (ej: "011 4444-5555"); para llamar se usan solo los números.
+    //     Mientras esté vacío, el botón no se muestra y aparece "pendiente de completar".
+    //   - telefonoEmergencias: emergencias médicas (107 por defecto; el 911 se muestra aparte).
+    //   - direccion: calle y número del hospital. Mientras esté vacía, "Cómo llegar" busca el hospital por nombre.
+    const HOSPITAL = {
+      nombre: "Hospital General de Agudos Dr. René Favaloro",
+      localidad: "Rafael Castillo, La Matanza",
+      telefonoGuardia: "",        // [COMPLETAR] ej: "011 4444-5555"
+      telefonoEmergencias: "107", // [COMPLETAR si corresponde otro número]
+      direccion: ""               // [COMPLETAR] ej: "Av. Ejemplo 1234"
+    };
+
+    function prepararAlarma() {
+      const soloNumeros = t => String(t || "").replace(/[^\d+]/g, "");
+
+      const guardia = soloNumeros(HOSPITAL.telefonoGuardia);
+      const botonGuardia = document.getElementById("llamar-guardia");
+      botonGuardia.hidden = !guardia;
+      document.getElementById("falta-guardia").hidden = !!guardia;
+      if (guardia) {
+        botonGuardia.href = "tel:" + guardia;   // abre el marcador del celular
+        document.getElementById("numero-guardia").textContent = HOSPITAL.telefonoGuardia.trim();   // se muestra tal como está escrito
+      }
+
+      const emergencias = soloNumeros(HOSPITAL.telefonoEmergencias) || "107";
+      document.getElementById("llamar-emergencias").href = "tel:" + emergencias;
+      document.getElementById("numero-emergencias").textContent = String(HOSPITAL.telefonoEmergencias || "107").trim();
+
+      document.getElementById("hospital-nombre").textContent = HOSPITAL.nombre;
+      document.getElementById("hospital-direccion").textContent =
+        HOSPITAL.direccion ? `${HOSPITAL.direccion}, ${HOSPITAL.localidad}` : HOSPITAL.localidad;
+      document.getElementById("falta-direccion").hidden = !!HOSPITAL.direccion;
+
+      // "Cómo llegar": abre Google Maps (la app de mapas en el celular) con la dirección o el nombre del hospital
+      const destino = HOSPITAL.direccion ? `${HOSPITAL.direccion}, ${HOSPITAL.localidad}` : `${HOSPITAL.nombre}, ${HOSPITAL.localidad}`;
+      document.getElementById("boton-mapa").href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(destino);
+    }
+
+    prepararAlarma();
+
+
+    // =========================================================
+    // 13. PWA: registra el service worker (solo en https; abierto como archivo no hace nada)
     // =========================================================
     if ("serviceWorker" in navigator && window.isSecureContext && location.protocol !== "file:") {
       window.addEventListener("load", () => {
